@@ -1,0 +1,17 @@
+﻿@using Barly.Business;
+@model Barly.Models.SearchResultModel
+@{
+    ViewBag.Title = "Barly - Recherche";
+}
+
+<div class="row">
+    @foreach (Location location in Model.Locations)
+    {
+        @location.Name
+        <img src="@location.Picture"/>
+        <text>-</text>
+        @location.Latitude
+        <text>-</text>
+        @location.Longitude<br />
+    }
+</div>
