@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,26 @@ namespace Barly.Models
             {
                 Filters.Add(zipcode);
             }
+        }
+
+
+        public SearchResultModel(double latitude, double longitude)
+        {
+            Locations = new List<Location>();
+
+            var backOffice = new Business.BackOffice();
+
+            foreach (Location location in backOffice.Locations)
+            {
+                var searchCoordinate = new GeoCoordinate(latitude, longitude);
+                var locationCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);
+                if (searchCoordinate.GetDistanceTo(locationCoordinate) < 3000 && location.IsValid)
+                {
+                    Locations.Add(location);
+                }
+            }
+
+            Filters = new List<string>();
         }
     }
 }

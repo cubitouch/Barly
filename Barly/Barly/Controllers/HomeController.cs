@@ -25,5 +25,12 @@ namespace Barly.Controllers
             ViewBag.Filters = model.Filters;
             return View(model);
         }
+
+        public ActionResult SearchFromLocation(double latitude, double longitude)
+        {
+            var model = new SearchResultModel(latitude, longitude);
+            ViewBag.Filters = model.Filters;
+            return View("Search", model);
+        }
     }
 }

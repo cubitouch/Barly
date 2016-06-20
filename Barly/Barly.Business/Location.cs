@@ -16,8 +16,8 @@ namespace Barly.Business
         public string Picture { get; set; }
         public string Address { get; set; }
         public string ZipCode { get; set; }
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public bool IsValid { get; set; }
 
         public Location()
@@ -41,8 +41,8 @@ namespace Barly.Business
             Picture = GetResourceLink(row, "Photo");
             Address = row.Values["Adresse"].ToString();
             ZipCode = row.Values["Code postal"].ToString();
-            Latitude = decimal.Parse(row.Values["Latitude"].ToString());
-            Longitude = decimal.Parse(row.Values["Longitude"].ToString());
+            Latitude = double.Parse(row.Values["Latitude"].ToString());
+            Longitude = double.Parse(row.Values["Longitude"].ToString());
             IsValid = bool.Parse(row.Values["Validé"].ToString());
         }
     }

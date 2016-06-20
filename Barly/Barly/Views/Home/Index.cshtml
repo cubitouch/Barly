@@ -39,5 +39,22 @@
                 </div>
             </div>
         </form>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10 col-md-6 col-md-offset-6">
+                    <button id="geolocalisation" class="btn btn-default btn-block">Geolocalisation</button>
+                </div>
+            </div>
     </div>
 </div>
+<script>
+    $('#geolocalisation').click(function () {
+        if ("geolocation" in navigator) {
+            /* géolocalisation possible */
+            navigator.geolocation.getCurrentPosition(function (position) {
+                window.location = "/Home/SearchFromLocation?latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude;
+            });
+        } else {
+            alert("Le service de géolocalisation n'est pas disponible sur votre ordinateur.");
+        }
+    });
+</script>
