@@ -10,6 +10,7 @@ namespace Barly.Models
     public class SearchResultModel
     {
         public IList<Location> Locations { get; set; }
+        public IList<string> Filters { get; set; }
 
         public SearchResultModel()
         {
@@ -24,10 +25,16 @@ namespace Barly.Models
 
             foreach (Location location in backOffice.Locations)
             {
-                if (zipcodes.Contains(location.ZipCode))
+                if (zipcodes.Contains(location.ZipCode) && location.IsValid)
                 {
                     Locations.Add(location);
                 }
+            }
+
+            Filters = new List<string>();
+            foreach (string zipcode in zipcodes)
+            {
+                Filters.Add(zipcode);
             }
         }
     }

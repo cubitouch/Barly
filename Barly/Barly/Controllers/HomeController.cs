@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using Barly.Models;
@@ -11,13 +12,17 @@ namespace Barly.Controllers
     {
         public ActionResult Index()
         {
+            //    if (ClaimsPrincipal.Current.FindFirst("email") != null)
+            //    {
+            //        var test = ClaimsPrincipal.Current.FindFirst("email").Value;
+            //    }
             return View();
         }
 
         public ActionResult Search(IList<string> zipcodes)
         {
             var model = new SearchResultModel(zipcodes);
-
+            ViewBag.Filters = model.Filters;
             return View(model);
         }
     }

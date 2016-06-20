@@ -1,4 +1,43 @@
-﻿@{
+﻿@using System.Security.Claims;
+@{
     ViewBag.Title = "Barly";
 }
 
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-md-offset-3">
+        <form action="/Home/Search" method="get" class="form-horizontal">
+            <div class="form-group">
+                <label for="cmbZipcode" class="col-sm-2 col-md-6 control-label">Arrondissement</label>
+                <div class="col-sm-10 col-md-6">
+                    <select name="zipcodes" class="form-control" multiple>
+                        <option value="75001">Paris 1</option>
+                        <option value="75002">Paris 2</option>
+                        <option value="75003">Paris 3</option>
+                        <option value="75004">Paris 4</option>
+                        <option value="75005">Paris 5</option>
+                        <option value="75006">Paris 6</option>
+                        <option value="75007">Paris 7</option>
+                        <option value="75008">Paris 8</option>
+                        <option value="75009">Paris 9</option>
+                        <option value="75010">Paris 10</option>
+                        <option value="75011">Paris 11</option>
+                        <option value="75012">Paris 12</option>
+                        <option value="75013">Paris 13</option>
+                        <option value="75014">Paris 14</option>
+                        <option value="75015">Paris 15</option>
+                        <option value="75016">Paris 16</option>
+                        <option value="75017">Paris 17</option>
+                        <option value="75018">Paris 18</option>
+                        <option value="75019">Paris 19</option>
+                        <option value="75020">Paris 20</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10 col-md-6 col-md-offset-6">
+                    <button type="submit" class="btn btn-default btn-block">Trouver</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
