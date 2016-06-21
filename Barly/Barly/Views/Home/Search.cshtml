@@ -18,6 +18,14 @@
                 <div class="caption">
                     <h3>@location.Name</h3>
                     <p>@Html.Raw(location.Schedule)</p>
+                    <p>
+                        <a href="geo:@location.Latitude,@location.Longitude;u=35" class="btn btn-default"><i class="glyphicon glyphicon-map-marker"></i></a>
+                        <!-- Your share button code -->
+                        <div class="fb-share-button"
+                        data-href=@("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)
+                        data-layout="button_count">
+                        </div>
+                    </p>
                 </div>
             </div>
         </div>

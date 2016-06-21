@@ -58,5 +58,23 @@ namespace Barly.Models
 
             Filters = new List<string>();
         }
+
+        public SearchResultModel(int id)
+        {
+            Locations = new List<Location>();
+            Filters = new List<string>();
+
+            var backOffice = new Business.BackOffice();
+
+            foreach (Location location in backOffice.Locations)
+            {
+                if (location.Id == id && location.IsValid)
+                {
+                    Locations.Add(location);
+                    Filters.Add(location.Name);
+                }
+            }
+
+        }
     }
 }

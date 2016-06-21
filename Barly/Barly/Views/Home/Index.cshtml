@@ -2,50 +2,39 @@
 @{
     ViewBag.Title = "Barly";
 }
-
-<div class="row">
-    <div class="col-sm-12 col-md-6 col-md-offset-3">
-        <form action="/Home/Search" method="get" class="form-horizontal">
-            <div class="form-group">
-                <label for="cmbZipcode" class="col-sm-2 col-md-6 control-label">Arrondissement</label>
-                <div class="col-sm-10 col-md-6">
-                    <select name="zipcodes" class="form-control" multiple>
-                        <option value="75001">Paris 1</option>
-                        <option value="75002">Paris 2</option>
-                        <option value="75003">Paris 3</option>
-                        <option value="75004">Paris 4</option>
-                        <option value="75005">Paris 5</option>
-                        <option value="75006">Paris 6</option>
-                        <option value="75007">Paris 7</option>
-                        <option value="75008">Paris 8</option>
-                        <option value="75009">Paris 9</option>
-                        <option value="75010">Paris 10</option>
-                        <option value="75011">Paris 11</option>
-                        <option value="75012">Paris 12</option>
-                        <option value="75013">Paris 13</option>
-                        <option value="75014">Paris 14</option>
-                        <option value="75015">Paris 15</option>
-                        <option value="75016">Paris 16</option>
-                        <option value="75017">Paris 17</option>
-                        <option value="75018">Paris 18</option>
-                        <option value="75019">Paris 19</option>
-                        <option value="75020">Paris 20</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10 col-md-6 col-md-offset-6">
-                    <button type="submit" class="btn btn-default btn-block">Trouver</button>
-                </div>
-            </div>
-        </form>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10 col-md-6 col-md-offset-6">
-                    <button id="geolocalisation" class="btn btn-default btn-block">Geolocalisation</button>
-                </div>
-            </div>
+<form action="/Home/Search" method="get" class="form-horizontal">
+    <div class="input-content">
+        <select name="zipcodes" data-placeholder="Choisir un arrondissement" class="chosen-select" multiple tabindex="6">
+            <option value=""></option>
+            <optgroup label="Paris">
+                <option value="75001">Paris 1er</option>
+                <option value="75002">Paris 2eme</option>
+                <option value="75003">Paris 3eme</option>
+                <option value="75004">Paris 4eme</option>
+                <option value="75005">Paris 5eme</option>
+                <option value="75006">Paris 6eme</option>
+                <option value="75007">Paris 7eme</option>
+                <option value="75008">Paris 8eme</option>
+                <option value="75009">Paris 9eme</option>
+                <option value="75010">Paris 10eme</option>
+                <option value="75011">Paris 11eme</option>
+                <option value="75012">Paris 12eme</option>
+                <option value="75013">Paris 13eme</option>
+                <option value="75014">Paris 14eme</option>
+                <option value="75015">Paris 15eme</option>
+                <option value="75016">Paris 16eme</option>
+                <option value="75017">Paris 17eme</option>
+                <option value="75018">Paris 18eme</option>
+                <option value="75019">Paris 19eme</option>
+                <option value="75020">Paris 20eme</option>
+            </optgroup>
+        </select>
+        <a id="geolocalisation" class="geolocation" href="#"><i class="material-icons"></i></a>
     </div>
-</div>
+    <div class="search-content">
+        <button class="button-glossy mdl-button" >Rechercher</button>
+    </div>
+</form>
 <script>
     $('#geolocalisation').click(function () {
         if ("geolocation" in navigator) {

@@ -1,12 +1,18 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="" />
     <title>@ViewBag.Title</title>
+
     @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/mdl")
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
     <style>
         #filters {
             display: inline-block;
@@ -15,40 +21,86 @@
     </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Barly", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @if (ViewBag.Filters != null)
-                {
-                    <div id="filters">
-                        @foreach (string filter in ViewBag.Filters)
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <div class="wrapper">
+
+        <!-- Always shows a header, even in smaller screens. -->
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                    <span class="mdl-layout-title">
+                        @if (ViewBag.Filters != null)
                         {
-                            <span class="label label-default">
-                                @filter
+                            <span id="filters">
+                                @foreach (string filter in ViewBag.Filters)
+                                {
+                                    <span class="label label-default">
+                                        @filter
+                                    </span>
+                                    @Html.Raw("&nbsp;")
+                                }
                             </span>
-                            @Html.Raw("&nbsp;")
                         }
-                    </div>
-                }
-                <
+                    </span>
+                    <!-- Add spacer, to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
+                    <!-- Navigation. We hide it in small screens. -->
+                    <nav class="mdl-navigation mdl-layout--large-screen-only">
+                        <a class="mdl-button mdl-js-button mdl-button--raised sign-in" href="/Authentication/SignIn">
+                            Sign In
+                        </a>
+                        <a class="mdl-button mdl-js-button mdl-button--raised sign-up" href="/Authentication/SignUp">
+                            Sign Up
+                        </a>
+                    </nav>
+                </div>
+            </header>
+            <div class="mdl-layout__drawer">
+                <span class="mdl-layout-title">
+                    @Html.ActionLink("Barly", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </span>
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="#">Link</a>
+                    <a class="mdl-navigation__link" href="#">Link</a>
+                    <a class="mdl-navigation__link" href="#">Link</a>
+                    <a class="mdl-navigation__link" href="#">Link</a>
+                </nav>
             </div>
+            <main class="mdl-layout__content panel home">
+                <div class="page-content">
+                    <div class="content-home">
+                        @RenderBody()
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Barly</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/mdl")
+        @RenderSection("scripts", required: false)
+        <script type="text/javascript">
+        var config = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': { allow_single_deselect: true },
+            '.chosen-select-no-single': { disable_search_threshold: 10 },
+            '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+            '.chosen-select-width': { width: "95%" }
+        }
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+        </script>
 </body>
 </html>

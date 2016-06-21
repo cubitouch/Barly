@@ -32,5 +32,12 @@ namespace Barly.Controllers
             ViewBag.Filters = model.Filters;
             return View("Search", model);
         }
+
+        public ActionResult SearchFromBarId(int id)
+        {
+            var model = new SearchResultModel(id);
+            ViewBag.Filters = model.Filters;
+            return View("Search", model);
+        }
     }
 }
