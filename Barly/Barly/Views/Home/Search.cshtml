@@ -3,39 +3,8 @@
 @{
     ViewBag.Title = "Barly - Recherche";
 }
-<div class="row">
-    <div class="col-sm-12">
-        <div id="map-canvas"></div>
-    </div>
-</div>
-<hr />
-<div class="row">
-    @foreach (Location location in Model.Locations)
-    {
-        <div class="col-sm-4 col-md-3">
-            <div class="thumbnail">
-                <img src="@location.Picture" alt="photo du bar @location.Name">
-                <div class="caption">
-                    <h3>@location.Name</h3>
-                    <p>@Html.Raw(location.Schedule)</p>
-                    <p>
-                        <a href="geo:@location.Latitude,@location.Longitude;u=35" class="btn btn-default"><i class="glyphicon glyphicon-map-marker"></i></a>
-                        <!-- Your share button code -->
-                        <div class="fb-share-button"
-                        data-href=@("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)
-                        data-layout="button_count">
-                        </div>
-                    </p>
-                </div>
-            </div>
-        </div>
-    }
-</div>
-<style type="text/css">
-    html, body {
-        height: 100%;
-    }
 
+<style type="text/css">
     #map-canvas {
         width: 100%;
         height: 400px;
@@ -43,64 +12,124 @@
         padding: 0;
     }
 
-    .thumbnail img {
-        max-height: 200px;
+    .mdl-card > .mdl-card__title {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        height: 176px;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .mdl-card > .mdl-card__menu {
+        color: #fff;
+    }
+
+    .mdl-card .mdl-button {
+        background-color: rgba(158,158,158, 0.6);
+    }
+
+        .mdl-card .mdl-button:hover {
+            background-color: rgba(158,158,158, 0.8);
+        }
+
+    .mdl-card .mdl-card__title {
+        padding: 0;
+    }
+
+    .mdl-card .mdl-card__title-text {
+        background: rgba(0, 0, 0, 0.4);
+        padding: 8px 16px;
+        width: 100%;
     }
 </style>
 
-<script>
-    var locations = [
+<main class="mdl-layout__content home">
+    <div id="map-canvas"></div>
+    <div class="mdl-grid">
         @foreach (Location location in Model.Locations)
+            {
+            <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+                <div class="mdl-card__title" style="background: url('@location.Picture') center / cover;">
+                    <h2 class="mdl-card__title-text">@location.Name</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    @Html.Raw(location.Schedule)
+                </div>
+                @*<div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Get Started
+                        </a>
+                    </div>*@
+                <div class="mdl-card__menu">
+                    <a class="share-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="http://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)&title=@Uri.EscapeDataString("Barly - " + @location.Name)" target="_blank">
+                        <i class="material-icons">share</i>
+                    </a>
+                </div>
+            </div>
+
+            <a href="geo:@location.Latitude,@location.Longitude;u=35" class="btn btn-default"><i class="glyphicon glyphicon-map-marker"></i></a>
+
+        }
+    </div>
+
+    <script>
+        $(".share-button").click(function(){
+            console.log($(this).find('.fb-share-button').length);
+            $(this).parent().find('.fb-share-button').click();
+        });
+        var locations = [
+            @foreach (Location location in Model.Locations)
         {
         <text>{
-            Id: @location.Id,
-            Name: "@location.Name",
-            Schedule: "@location.Schedule",
-            Picture: "@location.Picture",
-            Address: "@location.Address",
-            Latitude: @location.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
-            Longitude: @location.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
-        },</text>
+                Id: @location.Id,
+                Name: "@location.Name",
+                Schedule: "@location.Schedule",
+                Picture: "@location.Picture",
+                Address: "@location.Address",
+                Latitude: @location.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                Longitude: @location.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            },</text>
         }
-    ];
-    //console.log(locations);
+        ];
+        //console.log(locations);
 
-    function initializeMap() {
-        var mapStyle = [{ "featureType": "landscape", "stylers": [{ "hue": "#FFBB00" }, { "saturation": 43.400000000000006 }, { "lightness": 37.599999999999994 }, { "gamma": 1 }] }, { "featureType": "road.highway", "stylers": [{ "hue": "#FFC200" }, { "saturation": -61.8 }, { "lightness": 45.599999999999994 }, { "gamma": 1 }] }, { "featureType": "road.arterial", "stylers": [{ "hue": "#FF0300" }, { "saturation": -100 }, { "lightness": 51.19999999999999 }, { "gamma": 1 }] }, { "featureType": "road.local", "stylers": [{ "hue": "#FF0300" }, { "saturation": -100 }, { "lightness": 52 }, { "gamma": 1 }] }, { "featureType": "water", "stylers": [{ "hue": "#0078FF" }, { "saturation": -13.200000000000003 }, { "lightness": 2.4000000000000057 }, { "gamma": 1 }] }, { "featureType": "poi", "stylers": [{ "hue": "#00FF6A" }, { "saturation": -1.0989010989011234 }, { "lightness": 11.200000000000017 }, { "gamma": 1 }] }];
+        function initializeMap() {
+            var mapStyle = [{ "featureType": "landscape", "stylers": [{ "hue": "#FFBB00" }, { "saturation": 43.400000000000006 }, { "lightness": 37.599999999999994 }, { "gamma": 1 }] }, { "featureType": "road.highway", "stylers": [{ "hue": "#FFC200" }, { "saturation": -61.8 }, { "lightness": 45.599999999999994 }, { "gamma": 1 }] }, { "featureType": "road.arterial", "stylers": [{ "hue": "#FF0300" }, { "saturation": -100 }, { "lightness": 51.19999999999999 }, { "gamma": 1 }] }, { "featureType": "road.local", "stylers": [{ "hue": "#FF0300" }, { "saturation": -100 }, { "lightness": 52 }, { "gamma": 1 }] }, { "featureType": "water", "stylers": [{ "hue": "#0078FF" }, { "saturation": -13.200000000000003 }, { "lightness": 2.4000000000000057 }, { "gamma": 1 }] }, { "featureType": "poi", "stylers": [{ "hue": "#00FF6A" }, { "saturation": -1.0989010989011234 }, { "lightness": 11.200000000000017 }, { "gamma": 1 }] }];
 
-        var mapOptions = {
-            zoom: 3,
-            styles: mapStyle
-        };
-        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        //create empty LatLngBounds object
-        var bounds = new google.maps.LatLngBounds();
-        var infowindow = new google.maps.InfoWindow();
+            var mapOptions = {
+                zoom: 3,
+                styles: mapStyle
+            };
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            //create empty LatLngBounds object
+            var bounds = new google.maps.LatLngBounds();
+            var infowindow = new google.maps.InfoWindow();
 
-        for (i = 0; i < locations.length; i++) {
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(locations[i].Latitude, locations[i].Longitude),
-                map: map
-            });
+            for (i = 0; i < locations.length; i++) {
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i].Latitude, locations[i].Longitude),
+                    map: map
+                });
 
-            //extend the bounds to include each marker's position
-            bounds.extend(marker.position);
+                //extend the bounds to include each marker's position
+                bounds.extend(marker.position);
 
-            google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                return function () {
-                    infowindow.setContent(locations[i].Name);
-                    infowindow.open(map, marker);
-                }
-            })(marker, i));
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(locations[i].Name);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
+
+            //now fit the map to the newly inclusive bounds
+            map.fitBounds(bounds);
+
         }
+    </script>
 
-        //now fit the map to the newly inclusive bounds
-        map.fitBounds(bounds);
-
-    }
-</script>
-
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-<script>
-    google.maps.event.addDomListener(window, 'load', initializeMap);
-</script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+        google.maps.event.addDomListener(window, 'load', initializeMap);
+    </script>
+</main>

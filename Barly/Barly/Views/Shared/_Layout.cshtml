@@ -6,7 +6,6 @@
     <meta name="description" content="" />
     <title>@ViewBag.Title</title>
 
-    @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/mdl")
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -52,17 +51,21 @@
                                 }
                             </span>
                         }
+                        else
+                        {
+                            <text>Barly</text>
+                        }
                     </span>
                     <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
                     <!-- Navigation. We hide it in small screens. -->
                     <nav class="mdl-navigation mdl-layout--large-screen-only">
-                        <a class="mdl-button mdl-js-button mdl-button--raised sign-in" href="/Authentication/SignIn">
-                            Sign In
-                        </a>
-                        <a class="mdl-button mdl-js-button mdl-button--raised sign-up" href="/Authentication/SignUp">
-                            Sign Up
-                        </a>
+                        @*<a class="mdl-button mdl-js-button mdl-button--raised sign-in" href="/Authentication/SignIn">
+                                Sign In
+                            </a>
+                            <a class="mdl-button mdl-js-button mdl-button--raised sign-up" href="/Authentication/SignUp">
+                                Sign Up
+                            </a>*@
                     </nav>
                 </div>
             </header>
@@ -77,20 +80,19 @@
                     <a class="mdl-navigation__link" href="#">Link</a>
                 </nav>
             </div>
-            <main class="mdl-layout__content panel home">
-                <div class="page-content">
-                    <div class="content-home">
-                        @RenderBody()
-                    </div>
+            @RenderBody()
+
+            <footer class="mdl-mini-footer">
+                <div class="mdl-mini-footer--middle-section">
+                    <p>Fait avec <i class="material-icons favorite">favorite</i> à Paris</p>
                 </div>
-            </main>
+            </footer>
         </div>
     </div>
 
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/mdl")
-        @RenderSection("scripts", required: false)
-        <script type="text/javascript">
+    @Scripts.Render("~/bundles/mdl")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
         var config = {
             '.chosen-select': {},
             '.chosen-select-deselect': { allow_single_deselect: true },
@@ -101,6 +103,6 @@
         for (var selector in config) {
             $(selector).chosen(config[selector]);
         }
-        </script>
+    </script>
 </body>
 </html>
