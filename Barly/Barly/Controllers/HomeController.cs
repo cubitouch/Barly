@@ -19,6 +19,11 @@ namespace Barly.Controllers
             return View();
         }
 
+        public ActionResult Filter()
+        {
+            return View();
+        }
+
         public ActionResult Search(IList<string> zipcodes)
         {
             var model = new SearchResultModel(zipcodes);

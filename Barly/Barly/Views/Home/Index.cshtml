@@ -3,240 +3,121 @@
     ViewBag.Title = "Barly";
 }
 <main class="mdl-layout__content home">
-    <div class="page-content">
+    <div class="search-content">
         <div class="content-home">
-            <form action="/Home/Search" method="get" class="form-horizontal">
-                <ul class="mdl-list">
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-1">
-                            Paris 1er
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-1">
-                                <input type="checkbox" id="list-switch-1" name="zipcodes" value="75001" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-2">
-                            Paris 2ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-2">
-                                <input type="checkbox" id="list-switch-2" name="zipcodes" value="75002" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-3">
-                            Paris 3ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-3">
-                                <input type="checkbox" id="list-switch-3" name="zipcodes" value="75003" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-4">
-                            Paris 4ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-4">
-                                <input type="checkbox" id="list-switch-4" name="zipcodes" value="75004" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-5">
-                            Paris 5ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-5">
-                                <input type="checkbox" id="list-switch-5" name="zipcodes" value="75005" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-6">
-                            Paris 6ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-6">
-                                <input type="checkbox" id="list-switch-6" name="zipcodes" value="75006" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-7">
-                            Paris 7ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-7">
-                                <input type="checkbox" id="list-switch-7" name="zipcodes" value="75007" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-8">
-                            Paris 8ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-8">
-                                <input type="checkbox" id="list-switch-8" name="zipcodes" value="75008" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-9">
-                            Paris 9ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-9">
-                                <input type="checkbox" id="list-switch-9" name="zipcodes" value="75009" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-10">
-                            Paris 10ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-10">
-                                <input type="checkbox" id="list-switch-10" name="zipcodes" value="75010" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-11">
-                            Paris 11ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-11">
-                                <input type="checkbox" id="list-switch-11" name="zipcodes" value="75011" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-12">
-                            Paris 12ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-12">
-                                <input type="checkbox" id="list-switch-12" name="zipcodes" value="75012" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-13">
-                            Paris 13ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-13">
-                                <input type="checkbox" id="list-switch-13" name="zipcodes" value="75013" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-14">
-                            Paris 14ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-14">
-                                <input type="checkbox" id="list-switch-14" name="zipcodes" value="75014" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-15">
-                            Paris 15ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-15">
-                                <input type="checkbox" id="list-switch-15" name="zipcodes" value="75015" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-16">
-                            Paris 16ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-16">
-                                <input type="checkbox" id="list-switch-16" name="zipcodes" value="75016" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-17">
-                            Paris 17ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-17">
-                                <input type="checkbox" id="list-switch-17" name="zipcodes" value="75017" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-18">
-                            Paris 18ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-18">
-                                <input type="checkbox" id="list-switch-18" name="zipcodes" value="75018" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-19">
-                            Paris 19ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-19">
-                                <input type="checkbox" id="list-switch-19" name="zipcodes" value="75019" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="list-switch-20">
-                            Paris 20ème
-                        </label>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch" for="list-switch-20">
-                                <input type="checkbox" id="list-switch-20" name="zipcodes" value="75020" class="mdl-switch__input" />
-                            </label>
-                        </span>
-                    </li>
-                </ul>
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-phone">
-                        <button class="button-glossy mdl-button">Rechercher</button>
+            <div class="mdl-grid" style="text-align:center;">
+                <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet">
+                    <div class="mdl-card__title" style="background: url('https://static.pexels.com/photos/25921/pexels-photo-25921.jpg') center / cover;">
+                        <h2 class="mdl-card__title-text">Envie de boire un verre ce soir ?</h2>
                     </div>
-                    <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-phone">
-                        <a id="geolocalisation" class="mdl-button button-glossy" href="#">
-                            <i class="material-icons">my_location</i>
-                        </a>
+                    <div class="mdl-card__supporting-text">
+                        Découvrir son prochain bar préféré n'a jamais été aussi facile
+                    </div>
+                    @*<div class="mdl-card__actions mdl-card--border">
+                            <form action="#">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" type="text" id="sample1">
+                                    <label class="mdl-textfield__label" for="sample1">Email</label>
+                                </div>
+                                <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                                    Rester en contact
+                                </a>
+                            </form>
+                        </div>*@
+                    <div class="mdl-card__actions mdl-card--border">
+                        <!-- Begin MailChimp Signup Form -->
+                        <form action="//azurewebsites.us13.list-manage.com/subscribe/post?u=520a415f649fadca380973a3f&amp;id=18b27d5fe6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input type="email" value="" name="EMAIL" class="required email mdl-textfield__input" id="mce-EMAIL">
+                                <label for="mce-EMAIL" class="mdl-textfield__label">Email </label>
+                            </div>
+                            <input type="submit" value="Rester en contact" name="subscribe" id="mc-embedded-subscribe" class="button mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                            <div id="mce-responses" class="clear">
+                                <div class="response" id="mce-error-response" style="display:none"></div>
+                                <div class="response" id="mce-success-response" style="display:none"></div>
+                            </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_520a415f649fadca380973a3f_18b27d5fe6" tabindex="-1" value=""></div>
+                        </form>
+                        <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+                        <script type='text/javascript'>
+                            (function ($) {
+                                window.fnames = new Array();
+                                window.ftypes = new Array();
+                                fnames[0] = 'EMAIL';
+                                ftypes[0] = 'email';
+                                /*
+                                * Translated default messages for the $ validation plugin.
+                                * Locale: FR
+*/
+                                $.extend($.validator.messages, {
+                                    required: "Ce champ est requis.",
+                                    remote: "Veuillez remplir ce champ pour continuer.",
+                                    email: "Veuillez entrer une adresse email valide.",
+                                    url: "Veuillez entrer une URL valide.",
+                                    date: "Veuillez entrer une date valide.",
+                                    dateISO: "Veuillez entrer une date valide (ISO).",
+                                    number: "Veuillez entrer un nombre valide.",
+                                    digits: "Veuillez entrer (seulement) une valeur numérique.",
+                                    creditcard: "Veuillez entrer un numéro de carte de crédit valide.",
+                                    equalTo: "Veuillez entrer une nouvelle fois la même valeur.",
+                                    accept: "Veuillez entrer une valeur avec une extension valide.",
+                                    maxlength: $.validator.format("Veuillez ne pas entrer plus de {0} caractères."),
+                                    minlength: $.validator.format("Veuillez entrer au moins {0} caractères."),
+                                    rangelength: $.validator.format("Veuillez entrer entre {0} et {1} caractères."),
+                                    range: $.validator.format("Veuillez entrer une valeur entre {0} et {1}."),
+                                    max: $.validator.format("Veuillez entrer une valeur inférieure ou égale à {0}."),
+                                    min: $.validator.format("Veuillez entrer une valeur supérieure ou égale à {0}.")
+                                });
+                            }(jQuery)); var $mcj = jQuery.noConflict(true);</script>
+                        <!--End mc_embed_signup-->
                     </div>
                 </div>
-            </form>
-            <script>
-                $('#geolocalisation').click(function () {
-                    if ("geolocation" in navigator) {
-                        /* géolocalisation possible */
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                            window.location = "/Home/SearchFromLocation?latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude;
-                        });
-                    } else {
-                        alert("Le service de géolocalisation n'est pas disponible sur votre ordinateur.");
-                    }
-                });
-            </script>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet">
+                        <div class="mdl-card__actions mdl-card--border">
+                            <h2>Proximité</h2>
+                            <a class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="/Home/Filter">
+                                <i class="material-icons">map</i>
+                            </a>
+                            <h3>Les meilleurs bars près de chez vous</h3>
+                            <p>Trouvez un bar pour ce soir selon votre localisation et basé sur l'avis de nos fêtards les plus assidus</h3>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet">
+                        <div class="mdl-card__actions mdl-card--border">
+                            <h2>Goût</h2>
+                            <a class="mdl-button mdl-js-button mdl-button--fab" id="taste-button" href="#">
+                                <i class="material-icons">favorite</i>
+                            </a>
+                            <div class="mdl-tooltip" for="taste-button">
+                                Bientôt en ligne !
+                            </div>
+                            <h3>Votre expérience personnelle</h3>
+                            <p>Aidez-nous à connnaitre vos goûts en listant les bars que vous aimez, et ceux que vous n'aimez pas</p>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet">
+                        <div class="mdl-card__actions mdl-card--border">
+                            <h2>Découverte</h2>
+                            <a class="mdl-button mdl-js-button mdl-button--fab" id="explore-button" href="#">
+                                <i class="material-icons">explore</i>
+                            </a>
+                            <div class="mdl-tooltip" for="explore-button">
+                                Bientôt en ligne !
+                            </div>
+                            <h3>Votre prochain bar préféré</h3>
+                            <p>Votre prochaine perle n'est peut être pas si loin, découvrez des bars qui ont plu à ceux ayant les même goûts que vous</p>
+                        </div>
+                </div>
+                </div>
+            </div>
             @*<div id="root" style="width: 280px; margin: 40px auto; padding: 10px; border-style: dashed; border-width: 1px;">
                     embeded area
                 </div>
                 <script src="https://cdn.auth0.com/js/lock-9.1.min.js"></script>
                 <script>
 
+                  var lock = new Auth0Lock('3zMCHxgmv8Q2VKif5CkEVhkS72XFQipK', 'cubitouch.eu.auth0.com');
 
 
                   lock.show({

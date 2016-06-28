@@ -4,79 +4,37 @@
     ViewBag.Title = "Barly - Recherche";
 }
 
-<style type="text/css">
-    #map-canvas {
-        width: 100%;
-        height: 400px;
-        margin: 0;
-        padding: 0;
-    }
-
-    .mdl-card > .mdl-card__title {
-        color: #fff;
-        font-size: 14px;
-        font-weight: 500;
-        height: 176px;
-        background: rgba(0, 0, 0, 0.2);
-    }
-
-    .mdl-card > .mdl-card__menu {
-        color: #fff;
-    }
-
-    .mdl-card .mdl-button {
-        background-color: rgba(158,158,158, 0.6);
-    }
-
-        .mdl-card .mdl-button:hover {
-            background-color: rgba(158,158,158, 0.8);
-        }
-
-    .mdl-card .mdl-card__title {
-        padding: 0;
-    }
-
-    .mdl-card .mdl-card__title-text {
-        background: rgba(0, 0, 0, 0.4);
-        padding: 8px 16px;
-        width: 100%;
-    }
-</style>
-
 <main class="mdl-layout__content home">
-    <div id="map-canvas"></div>
-    <div class="mdl-grid">
-        @foreach (Location location in Model.Locations)
+    <div class="search-content">
+        <div id="map-canvas"></div>
+        <div class="mdl-grid">
+            @foreach (Location location in Model.Locations)
             {
-            <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
-                <div class="mdl-card__title" style="background: url('@location.Picture') center / cover;">
-                    <h2 class="mdl-card__title-text">@location.Name</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    @Html.Raw(location.Schedule)
-                </div>
-                @*<div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Get Started
+                <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+                    <div class="mdl-card__title" style="background: url('@location.Picture') center / cover;">
+                        <h2 class="mdl-card__title-text">@location.Name</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        @Html.Raw(location.Schedule)
+                    </div>
+                    @*<div class="mdl-card__actions mdl-card--border">
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                Get Started
+                            </a>
+                        </div>*@
+                    <div class="mdl-card__menu">
+                        <a class="share-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="http://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)&title=@Uri.EscapeDataString("Barly - " + @location.Name)" target="_blank">
+                            <i class="material-icons">share</i>
                         </a>
-                    </div>*@
-                <div class="mdl-card__menu">
-                    <a class="share-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="http://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)&title=@Uri.EscapeDataString("Barly - " + @location.Name)" target="_blank">
-                        <i class="material-icons">share</i>
-                    </a>
+                    </div>
                 </div>
-            </div>
 
-            <a href="geo:@location.Latitude,@location.Longitude;u=35" class="btn btn-default"><i class="glyphicon glyphicon-map-marker"></i></a>
+                <a href="geo:@location.Latitude,@location.Longitude;u=35" class="btn btn-default"><i class="glyphicon glyphicon-map-marker"></i></a>
 
-        }
+            }
+        </div>
     </div>
-
     <script>
-        $(".share-button").click(function(){
-            console.log($(this).find('.fb-share-button').length);
-            $(this).parent().find('.fb-share-button').click();
-        });
         var locations = [
             @foreach (Location location in Model.Locations)
         {

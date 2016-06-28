@@ -388,3 +388,60 @@ a {
         transform: translateY(-4px);
     }
 }
+
+.search-content {
+    padding-top: 64px;
+}
+
+#map-canvas {
+    width: 100%;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .search-content {
+        padding-top: 56px;
+    }
+
+    #map-canvas {
+        height: 200px;
+    }
+}
+
+
+.mdl-card > .mdl-card__title {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    height: 176px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.mdl-card > .mdl-card__menu {
+    color: #fff;
+}
+
+.mdl-card .mdl-card__title {
+    padding: 0;
+}
+
+.mdl-card .mdl-card__title-text {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 16px;
+    width: 100%;
+}
+
+
+#features {
+    background-color: White;
+}
+
+#mce-responses {
+    margin-top: 10px;
+}
+
+    #mce-responses .response {
+        color: rgba(0,0,0, 0.87);
+    }
