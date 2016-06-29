@@ -152,7 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
+    <Content Include="Content\dialog-polyfill.css" />
+    <Content Include="Content\img\background-home-blur.jpg" />
     <Content Include="Content\img\logo.svg" />
+    <Content Include="Content\img\background-home.jpg" />
     <Content Include="Content\ionicons.css" />
     <Content Include="Content\material.css" />
     <Content Include="Content\reset.css" />
@@ -165,6 +168,7 @@
     <None Include="Properties\PublishProfiles\barly.pubxml" />
     <Content Include="Scripts\chosen.jquery.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\dialog-polyfill.js" />
     <Content Include="Scripts\jquery-2.2.2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

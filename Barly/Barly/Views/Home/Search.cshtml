@@ -5,23 +5,32 @@
 }
 
 <main class="mdl-layout__content home">
-    <div class="search-content">
-        <div id="map-canvas"></div>
-        <div class="mdl-grid">
+    <div class="search-content map">
+        <button id="maplistTrigger" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+            <i class="material-icons">list</i>
+        </button>
+        <div id="bar-map"></div>
+        <div id="bar-list" class="mdl-grid">
             @foreach (Location location in Model.Locations)
             {
-                <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+                <div data-id="@location.Id" class="bar mdl-card mdl-shadow--2dp mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
                     <div class="mdl-card__title" style="background: url('@location.Picture') center / cover;">
                         <h2 class="mdl-card__title-text">@location.Name</h2>
                     </div>
                     <div class="mdl-card__supporting-text">
                         @Html.Raw(location.Schedule)
                     </div>
-                    @*<div class="mdl-card__actions mdl-card--border">
-                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                                Get Started
-                            </a>
-                        </div>*@
+                    <div class="closer mdl-card__supporting-text mdl-card--border">
+                        @Html.Raw(location.Address)<br />
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="opener mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="$('.bar[data-id=@location.Id]').addClass('open');">
+                            Ouvrir
+                        </a>
+                        <a class="closer mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="$('.bar[data-id=@location.Id]').removeClass('open');">
+                            Fermer
+                        </a>
+                    </div>
                     <div class="mdl-card__menu">
                         <a class="share-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="http://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)&title=@Uri.EscapeDataString("Barly - " + @location.Name)" target="_blank">
                             <i class="material-icons">share</i>
@@ -35,13 +44,25 @@
         </div>
     </div>
     <script>
+        $(function(){
+            $('#maplistTrigger').click(function(){
+                $('.search-content').toggleClass('map');
+                $('.search-content').toggleClass('list');
+
+                if ($('.search-content').hasClass('list')){
+                    $('#maplistTrigger .material-icons').text('map');
+                } else {
+                    $('#maplistTrigger .material-icons').text('list');
+                }
+            });
+        });
         var locations = [
             @foreach (Location location in Model.Locations)
         {
         <text>{
                 Id: @location.Id,
                 Name: "@location.Name",
-                Schedule: "@location.Schedule",
+                Schedule: "@Html.Raw(location.Schedule)",
                 Picture: "@location.Picture",
                 Address: "@location.Address",
                 Latitude: @location.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
@@ -58,7 +79,7 @@
                 zoom: 3,
                 styles: mapStyle
             };
-            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            var map = new google.maps.Map(document.getElementById('bar-map'), mapOptions);
             //create empty LatLngBounds object
             var bounds = new google.maps.LatLngBounds();
             var infowindow = new google.maps.InfoWindow();
@@ -76,6 +97,7 @@
                     return function () {
                         infowindow.setContent(locations[i].Name);
                         infowindow.open(map, marker);
+                        $('.bar[data-id="'+locations[i].Id+'"]').addClass('open');
                     }
                 })(marker, i));
             }

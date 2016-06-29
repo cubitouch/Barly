@@ -17,6 +17,7 @@ namespace Barly
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                        "~/Scripts/dialog-polyfill.js",
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/mdl").Include(
@@ -30,7 +31,8 @@ namespace Barly
                       "~/Content/ionicons.css",
                       "~/Content/material.css",
                       "~/Content/reset.css",
-                      "~/Content/styles.css"));
+                      "~/Content/styles.css",
+                      "~/Content/dialog-polyfill.css"));
         }
     }
 }
