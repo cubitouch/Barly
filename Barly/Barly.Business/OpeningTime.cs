@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Barly.Business
 {
@@ -16,9 +17,15 @@ namespace Barly.Business
             {
                 if (Hours.Count == 0)
                     return "Fermé";
-                if (Hours.Count > 1)
-                    return string.Format("{0:HH}h{0:mm} - {1:HH}h{1:mm} / {2:HH}h{2:mm} - {3:HH}h{3:mm}", Hours[0].StartTime, Hours[0].EndTime, Hours[1].StartTime, Hours[1].EndTime);
-                return string.Format("{0:HH}h{0:mm} - {1:HH}h{1:mm}", Hours[0].StartTime, Hours[0].EndTime);
+                string format = "";
+                foreach (TimeInterval hour in Hours)
+                {
+                    format += string.Format("{0:HH}h{0:mm} - {1:HH}h{1:mm}", hour.StartTime, hour.EndTime);
+                    if (hour != Hours.Last())
+                        format += " / ";
+                }
+                return format;
+
             }
         }
     }

@@ -23,7 +23,7 @@ namespace Barly.Business
 
             DateTime endTime;
             DateTime.TryParse(end, out endTime);
-            if (endTime.Hour < 12)
+            if (endTime < startTime)
                 endTime = endTime.AddDays(1);
             EndTime = endTime;
         }
