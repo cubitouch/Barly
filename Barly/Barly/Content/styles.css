@@ -508,7 +508,7 @@ dialog img {
 }
 
 .bar .opener {
-    display: block;
+    display: inline-block;
 }
 
 .bar .closer {
@@ -520,7 +520,11 @@ dialog img {
 }
 
 .bar.open .closer {
-    display: block;
+    display: inline-block;
+}
+
+.bar.open .mdl-card__menu {
+    margin-top: 64px;
 }
 
 
@@ -545,10 +549,10 @@ dialog img {
 }
 
 #maplistTrigger {
-    position: absolute;
+    /*position: fixed;
     top: 72px;
     right: 16px;
-    z-index: 10;
+    z-index: 10;*/
 }
 
 #lander {
@@ -580,3 +584,13 @@ dialog img {
             color: white;
             padding: 10px;
         }
+
+.mdl-list .active {
+    color: White;
+    background-color: rgb(255, 64, 129);
+}
+
+    .mdl-list .active i,
+    .mdl-list .active .mdl-list__item-sub-title {
+        color: White !important;
+    }

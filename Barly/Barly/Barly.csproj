@@ -166,7 +166,6 @@
     <Content Include="Global.asax" />
     <Content Include="LoginCallback.ashx" />
     <None Include="Properties\PublishProfiles\barly.pubxml" />
-    <Content Include="Scripts\chosen.jquery.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\dialog-polyfill.js" />
     <Content Include="Scripts\jquery-2.2.2.min.js" />

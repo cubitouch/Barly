@@ -21,13 +21,11 @@ namespace Barly
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/mdl").Include(
-                      "~/Scripts/chosen.jquery.js",
                       "~/Scripts/main.js",
                       "~/Scripts/material.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/mdl").Include(
                       "~/Content/animate.css",
-                      "~/Content/chosen.css",
                       "~/Content/ionicons.css",
                       "~/Content/material.css",
                       "~/Content/reset.css",

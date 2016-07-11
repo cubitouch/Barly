@@ -3,12 +3,8 @@
 @{
     ViewBag.Title = "Barly - Recherche";
 }
-
 <main class="mdl-layout__content home">
     <div class="search-content map">
-        <button id="maplistTrigger" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-            <i class="material-icons">list</i>
-        </button>
         <div id="bar-map"></div>
         <div id="bar-list" class="mdl-grid">
             @foreach (Location location in Model.Locations)
@@ -17,34 +13,48 @@
                     <div class="mdl-card__title" style="background: url('@location.Picture') center / cover;">
                         <h2 class="mdl-card__title-text">@location.Name</h2>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        @Html.Raw(location.Schedule)
+                    <div class="closer mdl-card__supporting-text mdl-card--border">
+                        @*@Html.Raw(location.Schedule)*@
+                        @(location.IsOpenNow ? "Ouvert" : "Fermé") en ce moment
                     </div>
                     <div class="closer mdl-card__supporting-text mdl-card--border">
-                        @Html.Raw(location.Address)<br />
+                        <ul class="mdl-list">
+                            @foreach (OpeningTime openingTime in location.OpeningTimes)
+                            {
+                                <li class="mdl-list__item mdl-list__item--two-line @(openingTime.IsToday?"active":"")">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-icon">@(openingTime.IsOpen ? "local_bar" : "")</i>
+                                        <span>@openingTime.DayOfWeekMessage</span>
+                                        <span class="mdl-list__item-sub-title">@openingTime.HoursFormat</span>
+                                    </span>
+                                    @*<span class="mdl-list__item-secondary-content">
+                                            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">@(openingTime.IsToday ? "local_bar" : "")</i></a>
+                                        </span>*@
+                                </li>
+                            }
+                        </ul>
                     </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="opener mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="$('.bar[data-id=@location.Id]').addClass('open');">
-                            Ouvrir
-                        </a>
-                        <a class="closer mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="$('.bar[data-id=@location.Id]').removeClass('open');">
-                            Fermer
-                        </a>
+                    <div class="closer mdl-card__supporting-text mdl-card--border">
+                        <a href="geo:@location.Latitude,@location.Longitude;u=35" class="btn btn-default"><i class="material-icons">room</i>@Html.Raw(location.Address)</a>
                     </div>
                     <div class="mdl-card__menu">
-                        <a class="share-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="http://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)&title=@Uri.EscapeDataString("Barly - " + @location.Name)" target="_blank">
+                        <a class="opener mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="$('.bar[data-id=@location.Id]').addClass('open');">
+                            <i class="material-icons">search</i>
+                        </a>
+                        <a class="closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" href="http://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)&title=@Uri.EscapeDataString("Barly - " + @location.Name)" target="_blank">
                             <i class="material-icons">share</i>
+                        </a>
+                        <a class="closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="$('.bar[data-id=@location.Id]').removeClass('open');">
+                            <i class="material-icons">close</i>
                         </a>
                     </div>
                 </div>
-
-                <a href="geo:@location.Latitude,@location.Longitude;u=35" class="btn btn-default"><i class="glyphicon glyphicon-map-marker"></i></a>
-
             }
         </div>
     </div>
     <script>
         $(function(){
+            $('#maplistTrigger').show();
             $('#maplistTrigger').click(function(){
                 $('.search-content').toggleClass('map');
                 $('.search-content').toggleClass('list');

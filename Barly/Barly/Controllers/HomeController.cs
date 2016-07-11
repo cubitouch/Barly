@@ -27,21 +27,21 @@ namespace Barly.Controllers
         public ActionResult Search(IList<string> zipcodes)
         {
             var model = new SearchResultModel(zipcodes);
-            ViewBag.Filters = model.Filters;
+            //ViewBag.Filters = model.Filters;
             return View(model);
         }
 
         public ActionResult SearchFromLocation(double latitude, double longitude)
         {
             var model = new SearchResultModel(latitude, longitude);
-            ViewBag.Filters = model.Filters;
+            //ViewBag.Filters = model.Filters;
             return View("Search", model);
         }
 
         public ActionResult SearchFromBarId(int id)
         {
             var model = new SearchResultModel(id);
-            ViewBag.Filters = model.Filters;
+            //ViewBag.Filters = model.Filters;
             return View("Search", model);
         }
     }
