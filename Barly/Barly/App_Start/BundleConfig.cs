@@ -18,7 +18,8 @@ namespace Barly
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/dialog-polyfill.js",
-                        "~/Scripts/modernizr-*"));
+                        "~/Scripts/modernizr-*",
+                        "~/Scripts/markerclusterer.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/mdl").Include(
                       "~/Scripts/main.js",

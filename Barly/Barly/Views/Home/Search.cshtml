@@ -94,11 +94,13 @@
             var bounds = new google.maps.LatLngBounds();
             var infowindow = new google.maps.InfoWindow();
 
+            var markers = [];
             for (i = 0; i < locations.length; i++) {
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i].Latitude, locations[i].Longitude),
                     map: map
                 });
+                markers.push(marker);
 
                 //extend the bounds to include each marker's position
                 bounds.extend(marker.position);
@@ -111,6 +113,8 @@
                     }
                 })(marker, i));
             }
+            /// need api key
+            var markerCluster = new MarkerClusterer(map, markers);
 
             //now fit the map to the newly inclusive bounds
             map.fitBounds(bounds);
@@ -118,7 +122,7 @@
         }
     </script>
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD61F5jFB_8ql02dWz6ql73Ve076nTEuQE"></script>
     <script>
         google.maps.event.addDomListener(window, 'load', initializeMap);
     </script>
