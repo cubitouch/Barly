@@ -204,6 +204,14 @@ a {
     .search-content-home .input-container {
         padding: 6px;
     }
+    .search-content-home .button-container {
+        padding:6px;
+    }
+    .search-content-home .button-container a,
+    .search-content-home .button-container button {
+        width:100%;
+    }
+
 
     .search-content-home ul {
         list-style-type: none;
