@@ -201,16 +201,6 @@ a {
     text-align: center;
 }
 
-    .search-content-home ul {
-        width: 100%;
-        float: left;
-    }
-
-        .search-content-home ul li {
-            float: left;
-            width: calc(100%/5);
-        }
-
     .search-content-home .input-container {
         padding: 6px;
     }
