@@ -30,8 +30,19 @@
             js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
+    <script>
+        function toastAlert(message) {
+            var snackbarContainer = document.querySelector('#toast');
+            console.log(snackbarContainer.MaterialSnackbar);
+            snackbarContainer.MaterialSnackbar.showSnackbar({ message: message });
+        }
+    </script>
 
     <div class="wrapper">
+        <div id="toast" class="mdl-js-snackbar mdl-snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button class="mdl-snackbar__action" type="button"></button>
+        </div>
 
         <!-- Always shows a header, even in smaller screens. -->
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -60,7 +71,7 @@
                     <div class="mdl-layout-spacer"></div>
                     <!-- Navigation. We hide it in small screens. -->
                     <nav class="mdl-navigation">
-                        <button id="maplistTrigger" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style="display:none;">
+                        <button id="maplistTrigger" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="display:none;">
                             <i class="material-icons">list</i>
                         </button>
                         @*<a class="mdl-button mdl-js-button mdl-button--raised sign-in" href="/Authentication/SignIn">
@@ -95,17 +106,5 @@
 
     @Scripts.Render("~/bundles/mdl")
     @RenderSection("scripts", required: false)
-    @*<script type="text/javascript">
-        var config = {
-            '.chosen-select': {},
-            '.chosen-select-deselect': { allow_single_deselect: true },
-            '.chosen-select-no-single': { disable_search_threshold: 10 },
-            '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
-            '.chosen-select-width': { width: "95%" }
-        }
-        for (var selector in config) {
-            $(selector).chosen(config[selector]);
-        }
-    </script>*@
 </body>
 </html>

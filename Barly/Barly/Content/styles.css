@@ -204,13 +204,15 @@ a {
     .search-content-home .input-container {
         padding: 6px;
     }
+
     .search-content-home .button-container {
-        padding:6px;
+        padding: 6px;
     }
-    .search-content-home .button-container a,
-    .search-content-home .button-container button {
-        width:100%;
-    }
+
+        .search-content-home .button-container a,
+        .search-content-home .button-container button {
+            width: 100%;
+        }
 
 
     .search-content-home ul {
@@ -559,3 +561,11 @@ dialog img {
     .mdl-list .active .mdl-list__item-sub-title {
         color: White !important;
     }
+
+.mdl-navigation .mdl-button {
+    height: 100%;
+    box-shadow: none;
+    border-radius:0;
+    border-left:1px solid rgba(255,255,255,0.6);
+    border-right:1px solid rgba(255,255,255,0.6);
+}

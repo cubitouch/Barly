@@ -5,7 +5,7 @@
 <main class="mdl-layout__content home">
     <div class="page-content">
         <div class="content-home">
-            <form action="/Home/Search" method="get" class="form-horizontal">
+            <form id="search" action="/Home/Search" method="get" class="form-horizontal">
 
                 <div class="search-content-home mdl-grid mdl-grid--no-spacing">
                     <div class="input-container mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
@@ -183,7 +183,13 @@
                                 window.location = "/Home/SearchFromLocation?latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude;
                             });
                         } else {
-                            alert("Le service de géolocalisation n'est pas disponible sur votre ordinateur.");
+                            toastAlert("Le service de géolocalisation n'est pas disponible.");
+                        }
+                    });
+                    $("#search").submit(function (event) {
+                        if ($('form input[type="checkbox"]:checked').length == 0) {
+                            event.preventDefault();
+                            return false;
                         }
                     });
                 });
