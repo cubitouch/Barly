@@ -381,9 +381,9 @@ a {
         padding-top: 56px;
     }
 
-    /*#bar-map {
-        height: 200px;
-    }*/
+    .bar.open {
+        padding-top: 56px !important;
+    }
 }
 
 
@@ -469,7 +469,7 @@ dialog img {
     height: 100%;
     z-index: 10;
     margin: 0;
-    padding-top: 70px;
+    padding-top: 64px;
     display: block !important;
     overflow: auto;
 }
@@ -565,7 +565,7 @@ dialog img {
 .mdl-navigation .mdl-button {
     height: 100%;
     box-shadow: none;
-    border-radius:0;
-    border-left:1px solid rgba(255,255,255,0.6);
-    border-right:1px solid rgba(255,255,255,0.6);
+    border-radius: 0;
+    border-left: 1px solid rgba(255,255,255,0.6);
+    border-right: 1px solid rgba(255,255,255,0.6);
 }
