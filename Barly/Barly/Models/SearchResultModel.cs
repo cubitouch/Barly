@@ -50,7 +50,7 @@ namespace Barly.Models
             {
                 var searchCoordinate = new GeoCoordinate(latitude, longitude);
                 var locationCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);
-                if (searchCoordinate.GetDistanceTo(locationCoordinate) < 3000 && location.IsValid)
+                if (searchCoordinate.GetDistanceTo(locationCoordinate) < 2000 && location.IsValid)
                 {
                     Locations.Add(location);
                 }
