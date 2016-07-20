@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Device.Location;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Barly.Business;
 
 namespace Barly.Models
@@ -22,7 +18,7 @@ namespace Barly.Models
         {
             Locations = new List<Location>();
 
-            var backOffice = new Business.BackOffice();
+            var backOffice = new BackOffice();
 
             foreach (Location location in backOffice.Locations)
             {

@@ -12,7 +12,7 @@ namespace Barly.Business
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Schedule { get; set; }
+        public string Description { get; set; }
         public List<OpeningTime> OpeningTimes { get; set; }
         public string Picture { get; set; }
         public string Address { get; set; }
@@ -72,7 +72,7 @@ namespace Barly.Business
         {
             Id = int.Parse(row.Values["Id"].ToString());
             Name = row.Values["Nom"].ToString();
-            Schedule = row.Values["Horaires"].ToString();
+            Description = row.Values["Description"].ToString();
             Picture = GetResourceLink(row, "Photo");
             Address = row.Values["Adresse"].ToString();
             ZipCode = row.Values["Code postal"].ToString();

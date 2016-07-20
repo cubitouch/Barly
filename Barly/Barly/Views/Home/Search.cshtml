@@ -13,11 +13,20 @@
                     <div class="mdl-card__title" style="background: url('@location.Picture') center / cover;">
                         <h2 class="mdl-card__title-text">@location.Name</h2>
                     </div>
-                    <div class="closer mdl-card__supporting-text mdl-card--border">
-                        @*@Html.Raw(location.Schedule)*@
-                        @(location.IsOpenNow ? "Ouvert" : "Fermé") en ce moment
+
+                    <div class="closer mdl-card-list mdl-card-state">
+                        <ul class="mdl-list">
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">@(location.IsOpenNow ? "schedule" : "watch_later")</i>
+                                    @(location.IsOpenNow ? "Ouvert" : "Fermé") en ce moment
+                                </span>
+                            </li>
+                        </ul>
+                         @*<br />*@
+                        @*@Html.Raw(location.Description)*@
                     </div>
-                    <div class="closer mdl-card__supporting-text mdl-card--border">
+                    <div class="closer mdl-card-list">
                         <ul class="mdl-list">
                             @foreach (OpeningTime openingTime in location.OpeningTimes)
                             {
@@ -27,24 +36,31 @@
                                         <span>@openingTime.DayOfWeekMessage</span>
                                         <span class="mdl-list__item-sub-title">@openingTime.HoursFormat</span>
                                     </span>
-                                    @*<span class="mdl-list__item-secondary-content">
-                                            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">@(openingTime.IsToday ? "local_bar" : "")</i></a>
-                                        </span>*@
                                 </li>
                             }
                         </ul>
                     </div>
-                    <div class="closer mdl-card__supporting-text mdl-card--border">
-                        <a href="geo:@location.Latitude,@location.Longitude;u=35" class="btn btn-default"><i class="material-icons">room</i>@Html.Raw(location.Address)</a>
+                    <div class="closer mdl-card-list mdl-card-adress">
+                        <ul class="mdl-list">
+                            <li class="mdl-list__item">
+                                <a href="http://maps.google.com/maps?daddr=@location.Latitude,@location.Longitude" target="_blank" class="btn btn-default">
+
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-icon">directions_run</i>
+                                        @Html.Raw(location.Address)
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="mdl-card__menu">
-                        <a class="opener mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="$('.bar[data-id=@location.Id]').addClass('open');">
-                            <i class="material-icons">search</i>
-                        </a>
+                        @*<a class="opener mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="$('.bar[data-id=@location.Id]').addClass('open');">
+                                <i class="material-icons">search</i>
+                            </a>*@
                         <a class="closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" href="http://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)&title=@Uri.EscapeDataString("Barly - " + @location.Name)" target="_blank">
                             <i class="material-icons">share</i>
                         </a>
-                        <a class="closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="$('.bar[data-id=@location.Id]').removeClass('open');">
+                        <a class="close-button closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                             <i class="material-icons">close</i>
                         </a>
                     </div>
@@ -59,7 +75,7 @@
         <text>{
                 Id: @location.Id,
                 Name: "@location.Name",
-                Schedule: "@Html.Raw(location.Schedule)",
+                @*Schedule: "@Html.Raw(location.Schedule)",*@
                 Picture: "@location.Picture",
                 Address: "@location.Address",
                 Latitude: @location.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
@@ -78,8 +94,23 @@
                     if ($('.search-content').hasClass('list')){
                         $('#maplistTrigger .material-icons').text('map');
                     } else {
-                        $('#maplistTrigger .material-icons').text('list');
+                        $('#maplistTrigger .material-icons').text('border_all');
                     }
+                });
+
+                $('.bar').click(function(){
+                    var bar = $(this);
+                    if (!bar.hasClass('open')) {
+                        bar.addClass('open');
+                        $('header').addClass('hide');
+                    }
+                });
+
+                $('.bar .close-button').click(function(e){
+                    $(this).closest('.bar').removeClass('open');
+                    $('header').removeClass('hide');
+                    e.preventDefault();
+                    return false;
                 });
             }
         });
@@ -89,7 +120,8 @@
 
             var mapOptions = {
                 zoom: 3,
-                styles: mapStyle
+                styles: mapStyle,
+                disableDefaultUI: true
             };
             var map = new google.maps.Map(document.getElementById('bar-map'), mapOptions);
             //create empty LatLngBounds object
@@ -112,6 +144,7 @@
                         infowindow.setContent(locations[i].Name);
                         infowindow.open(map, marker);
                         $('.bar[data-id="'+locations[i].Id+'"]').addClass('open');
+                        $('header').addClass('hide');
                     }
                 })(marker, i));
             }

@@ -146,7 +146,7 @@ a {
 
 
 .search-content {
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .input-content {
@@ -381,8 +381,8 @@ a {
         padding-top: 56px;
     }
 
-    .bar.open {
-        padding-top: 56px !important;
+    header.hide {
+        display: none !important;
     }
 }
 
@@ -461,38 +461,55 @@ dialog img {
     overflow: scroll;
 }
 
-.bar.open {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    margin: 0;
-    padding-top: 64px;
-    display: block !important;
-    overflow: auto;
+.bar {
+    min-height: initial;
+    cursor: pointer;
 }
 
-.bar .opener {
-    display: inline-block;
-}
+    .bar .mdl-card__title-text {
+        text-align: center;
+        -webkit-align-self: flex-initial !important;
+        -ms-flex-item-align: initial !important;
+        align-self: initial !important;
+        display: block;
+    }
 
-.bar .closer {
-    display: none;
-}
+    .bar.open .mdl-card__title-text {
+        -webkit-align-self: flex-end !important;
+        -ms-flex-item-align: end !important;
+        align-self: end !important;
+    }
 
-.bar.open .opener {
-    display: none;
-}
 
-.bar.open .closer {
-    display: inline-block;
-}
+    .bar.open {
+        cursor: default;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        margin: 0;
+        display: block !important;
+        overflow: auto;
+    }
 
-.bar.open .mdl-card__menu {
-    margin-top: 64px;
-}
+    .bar .opener {
+        display: inline-block;
+    }
+
+    .bar .closer {
+        display: none;
+    }
+
+    .bar.open .opener {
+        display: none;
+    }
+
+    .bar.open .closer {
+        display: inline-block;
+    }
+
 
 
 .search-content.map #bar-map {
@@ -513,13 +530,6 @@ dialog img {
 
 .search-content.list #bar-list .bar {
     display: block;
-}
-
-#maplistTrigger {
-    /*position: fixed;
-    top: 72px;
-    right: 16px;
-    z-index: 10;*/
 }
 
 #lander {
@@ -569,3 +579,33 @@ dialog img {
     border-left: 1px solid rgba(255,255,255,0.6);
     border-right: 1px solid rgba(255,255,255,0.6);
 }
+
+header.hide {
+    display: none;
+}
+
+.mdl-card-list {
+    width: 100%;
+    border-top: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.mdl-card-adress {
+    background-color:rgb(47, 46, 60);
+    border:none;
+}
+.mdl-card-adress .mdl-list{
+    background:none;
+}
+    .mdl-card-adress .material-icons,
+    .mdl-card-adress span {
+    color: white;
+    }
+    
+.mdl-card-adress .mdl-list{
+    background:none;
+}
+    .mdl-card-adress .material-icons,
+    .mdl-card-adress span {
+    /*color: white;*/
+    }
