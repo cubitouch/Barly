@@ -43,18 +43,25 @@ namespace Barly.Models
 
             var backOffice = new Business.BackOffice();
 
-            foreach (Location location in backOffice.Locations)
+            int zone = 0;
+            while (Locations.Count < findNumberBarFromLocations)
             {
-                var searchCoordinate = new GeoCoordinate(latitude, longitude);
-                var locationCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);
-                if (searchCoordinate.GetDistanceTo(locationCoordinate) < 2000 && location.IsValid)
+                zone += 200;
+                foreach (Location location in backOffice.Locations)
                 {
-                    Locations.Add(location);
+                    var searchCoordinate = new GeoCoordinate(latitude, longitude);
+                    var locationCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);
+                    if (searchCoordinate.GetDistanceTo(locationCoordinate) < zone && location.IsValid)
+                    {
+                        Locations.Add(location);
+                    }
                 }
             }
 
             Filters = new List<string>();
         }
+
+        private const int findNumberBarFromLocations = 5;
 
         private static double DegreesToRadians(double angle)
         {
@@ -89,16 +96,21 @@ namespace Barly.Models
 
             var backOffice = new Business.BackOffice();
 
-            foreach (Location location in backOffice.Locations)
+            int zone = 0;
+            while (Locations.Count < findNumberBarFromLocations)
             {
-                var locationCoordinateA = new GeoCoordinate(latitudeA, longitudeA);
-                var locationCoordinateB = new GeoCoordinate(latitudeB, longitudeB);
-                var searchCoordinate = MidPoint(locationCoordinateA, locationCoordinateB);
-
-                var locationCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);
-                if (searchCoordinate.GetDistanceTo(locationCoordinate) < 2000 && location.IsValid)
+                zone += 200;
+                foreach (Location location in backOffice.Locations)
                 {
-                    Locations.Add(location);
+                    var locationCoordinateA = new GeoCoordinate(latitudeA, longitudeA);
+                    var locationCoordinateB = new GeoCoordinate(latitudeB, longitudeB);
+                    var searchCoordinate = MidPoint(locationCoordinateA, locationCoordinateB);
+
+                    var locationCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);
+                    if (searchCoordinate.GetDistanceTo(locationCoordinate) < zone && location.IsValid)
+                    {
+                        Locations.Add(location);
+                    }
                 }
             }
 
