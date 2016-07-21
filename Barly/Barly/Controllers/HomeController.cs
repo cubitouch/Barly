@@ -24,11 +24,23 @@ namespace Barly.Controllers
             return View();
         }
 
+        public ActionResult Between()
+        {
+            return View();
+        }
+
         public ActionResult Search(IList<string> zipcodes)
         {
             var model = new SearchResultModel(zipcodes);
             //ViewBag.Filters = model.Filters;
             return View(model);
+        }
+
+        public ActionResult SearchFromBetween(double latA, double lngA, double latB, double lngB)
+        {
+            var model = new SearchResultModel(latA, lngA, latB, lngB);
+            //ViewBag.Filters = model.Filters;
+            return View("Search", model);
         }
 
         public ActionResult SearchFromLocation(double latitude, double longitude)

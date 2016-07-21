@@ -230,7 +230,7 @@ a {
     .search-content-home label {
         display: block;
         position: relative;
-        margin: 6px;
+        /*margin: 6px;*/
         padding: 12px;
         background-color: #23232b;
         color: #ffffff;
@@ -564,7 +564,7 @@ dialog img {
 
 .mdl-list .active {
     color: White;
-    background-color: rgb(255, 64, 129);
+    background-color: rgba(255, 64, 129,0.5);
 }
 
     .mdl-list .active i,
@@ -591,21 +591,54 @@ header.hide {
 }
 
 .mdl-card-adress {
-    background-color:rgb(47, 46, 60);
-    border:none;
+    background-color: rgb(47, 46, 60);
+    border: none;
 }
-.mdl-card-adress .mdl-list{
-    background:none;
-}
+
+    .mdl-card-adress .mdl-list {
+        background: none;
+    }
+
     .mdl-card-adress .material-icons,
     .mdl-card-adress span {
-    color: white;
+        color: white;
     }
-    
-.mdl-card-adress .mdl-list{
-    background:none;
-}
+
+    .mdl-card-adress .mdl-list {
+        background: none;
+    }
+
     .mdl-card-adress .material-icons,
     .mdl-card-adress span {
-    /*color: white;*/
+        /*color: white;*/
     }
+
+.mdl-mini-footer {
+    padding: 0;
+}
+
+    .mdl-mini-footer .mdl-mini-footer--middle-section {
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+        padding: 2px 0;
+    }
+
+        .mdl-mini-footer .mdl-mini-footer--middle-section .mdl-button.third {
+            width: calc( 32% );
+        }
+
+#betweenContainer .mdl-textfield {
+    width: 100%;
+}
+
+#betweenContainer .mdl-button {
+    width: 100%;
+}
+
+#betweenContainer .mdl-textfield__label.is-success:after {
+    background-color: greenyellow;
+    left: 0;
+    visibility: visible;
+    width: 100%;
+}

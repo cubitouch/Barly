@@ -228,6 +228,7 @@
     <Content Include="images\heart30.png" />
     <Content Include="images\heart40.png" />
     <Content Include="images\heart50.png" />
+    <Content Include="images\ic_local_bar_3x.png" />
     <Content Include="images\m1.png" />
     <Content Include="images\m2.png" />
     <Content Include="images\m3.png" />
@@ -273,6 +274,7 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Filter.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Home\Between.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\locations\" />

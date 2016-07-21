@@ -23,7 +23,7 @@
                                 </span>
                             </li>
                         </ul>
-                         @*<br />*@
+                        @*<br />*@
                         @*@Html.Raw(location.Description)*@
                     </div>
                     <div class="closer mdl-card-list">
@@ -41,17 +41,20 @@
                         </ul>
                     </div>
                     <div class="closer mdl-card-list mdl-card-adress">
-                        <ul class="mdl-list">
-                            <li class="mdl-list__item">
-                                <a href="http://maps.google.com/maps?daddr=@location.Latitude,@location.Longitude" target="_blank" class="btn btn-default">
-
+                        <a href="http://maps.google.com/maps?daddr=@location.Latitude,@location.Longitude" target="_blank">
+                            <ul class="mdl-list">
+                                <li class="mdl-list__item">
                                     <span class="mdl-list__item-primary-content">
                                         <i class="material-icons mdl-list__item-icon">directions_run</i>
                                         @Html.Raw(location.Address)
                                     </span>
-                                </a>
-                            </li>
-                        </ul>
+                                    <span class="mdl-list__item-secondary-action">
+                                        @*<span class="mdl-list__item-secondary-info">Actor</span>*@
+                                        <i class="material-icons">navigate_next</i>
+                                    </span>
+                                </li>
+                            </ul>
+                        </a>
                     </div>
                     <div class="mdl-card__menu">
                         @*<a class="opener mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="$('.bar[data-id=@location.Id]').addClass('open');">
@@ -132,7 +135,8 @@
             for (i = 0; i < locations.length; i++) {
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i].Latitude, locations[i].Longitude),
-                    map: map
+                    map: map,
+                    //icon:'/images/ic_local_bar_2x.png'
                 });
                 markers.push(marker);
 
