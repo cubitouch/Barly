@@ -19,6 +19,10 @@ namespace Barly.Business
         public string Menu { get; set; }
         public int Price { get; set; }
 
+        public FoursquareVenue()
+        {
+
+        }
         public FoursquareVenue(string urlOrId)
         {
             string id = "";
@@ -37,21 +41,35 @@ namespace Barly.Business
                 client.Encoding = Encoding.UTF8;
                 string json = client.DownloadString(string.Format(apiUrlFormat, id));
 
-                var response = JsonUtilities.Deserialize<FoursquareAPIResponse>(json);
+                var baseResponse = JsonUtilities.Deserialize<FoursquareAPIBase>(json);
+                var response = baseResponse.response;
                 //return response.venue;
                 Id = response.venue.id;
                 if (response.venue.contact.ContainsKey("phone"))
                     Phone = response.venue.contact["phone"];
                 Website = response.venue.url;
-                Menu = response.venue.menu.url;
-                Price = response.venue.price.tier;
+                Menu = response.venue.menu?.url;
+                Price = response.venue.price?.tier ?? 0;
             }
         }
     }
 
+    public class FoursquareAPIBase
+    {
+        public FoursquareAPIResponse response { get; set; }
+
+        public FoursquareAPIBase()
+        {
+        }
+    }
     public class FoursquareAPIResponse
     {
         public FoursquareAPIVenue venue { get; set; }
+
+        public FoursquareAPIResponse()
+        {
+            //venue = new FoursquareAPIVenue();
+        }
     }
     public class FoursquareAPIVenue
     {
@@ -60,6 +78,13 @@ namespace Barly.Business
         public string url { get; set; }
         public FoursquareAPIMenu menu { get; set; }
         public FoursquareAPIPrice price { get; set; }
+
+        public FoursquareAPIVenue()
+        {
+            //contact = new Dictionary<string, string>();
+            //menu = new FoursquareAPIMenu();
+            //price = new FoursquareAPIPrice();
+        }
     }
     public class FoursquareAPIPrice
     {

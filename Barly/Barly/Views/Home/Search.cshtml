@@ -49,12 +49,56 @@
                                         @Html.Raw(location.Address)
                                     </span>
                                     <span class="mdl-list__item-secondary-action">
-                                        @*<span class="mdl-list__item-secondary-info">Actor</span>*@
                                         <i class="material-icons">navigate_next</i>
                                     </span>
                                 </li>
                             </ul>
                         </a>
+                    </div>
+                    <div class="closer mdl-card-list mdl-card-foursquare" style="display: none;">
+                        <ul class="mdl-list">
+                            <li class="mdl-list__item foursquare-phone">
+                                <a href="tel:" target="_blank" class="foursquare-phone-control">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-icon">phone</i>
+                                        <span class="foursquare-phone-value"></span>
+                                    </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                        <i class="material-icons">navigate_next</i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="mdl-list__item foursquare-website">
+                                <a href="#" target="_blank" class="foursquare-website-control">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-icon">language</i>
+                                        <span class="foursquare-website-value"></span>
+                                    </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                        <i class="material-icons">navigate_next</i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="mdl-list__item foursquare-price">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">euro_symbol</i>
+                                    <span class="foursquare-price-value"></span>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <a href="@location.Foursquare" target="_blank">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-icon">store</i>
+                                        Voir sur Foursquare
+                                    </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                        <i class="material-icons">navigate_next</i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        @*<br />*@
+                        @*@Html.Raw(location.Description)*@
                     </div>
                     <div class="mdl-card__menu">
                         @*<a class="opener mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="$('.bar[data-id=@location.Id]').addClass('open');">
@@ -87,6 +131,44 @@
         }
         ];
         //console.log(locations);
+        function addFoursquareData(b){
+            var bar = $(b);
+
+            if (bar.find('.mdl-card-foursquare:visible').length == 0)
+                $.get('/Home/GetFoursquareInfos?id=' + bar.data('id') ,function(data){
+                    //console.log(data);
+                    if (data.Id != ''){
+                        var hasData=false;
+                        if (data.Phone != null && data.Phone != ''){
+                            hasData=true;
+                            bar.find('.foursquare-phone').css('display','flex');
+                            bar.find('.foursquare-phone-value').text(data.Phone);
+                            bar.find('.foursquare-phone-control').attr('href','tel:'+data.Phone);
+                        }
+                        if (data.Website != null && data.Website != ''){
+                            hasData=true;
+                            bar.find('.foursquare-website').css('display','flex');
+                            bar.find('.foursquare-website-value').text(data.Website);
+                            bar.find('.foursquare-website-control').attr('href',data.Website);
+                        }
+                        if (data.Price != 0){
+                            hasData=true;
+                            bar.find('.foursquare-price').css('display','flex');
+                            var html = '';
+                            for (var i = 0; i< data.Price; i++){
+                                html += '<i class="material-icons mdl-list__item-icon">star</i>';
+                            }
+                            for (var i = 0; i< 4-data.Price; i++){
+                                html += '<i class="material-icons mdl-list__item-icon">star_border</i>';
+                            }
+                            bar.find('.foursquare-price-value').html(html);
+                        }
+
+                        if (hasData)
+                            bar.find('.mdl-card-foursquare').show();
+                    }
+                });
+        }
         $(function(){
             if (locations.length>0){
                 $('#maplistTrigger').show();
@@ -106,6 +188,9 @@
                     if (!bar.hasClass('open')) {
                         bar.addClass('open');
                         $('header').addClass('hide');
+
+                        // get foursquare infos
+                        addFoursquareData(bar);
                     }
                 });
 
@@ -147,8 +232,12 @@
                     return function () {
                         infowindow.setContent(locations[i].Name);
                         infowindow.open(map, marker);
-                        $('.bar[data-id="'+locations[i].Id+'"]').addClass('open');
+                        var bar = $('.bar[data-id="'+locations[i].Id+'"]');
+                        bar.addClass('open');
                         $('header').addClass('hide');
+
+                        // get foursquare infos
+                        addFoursquareData(bar);
                     }
                 })(marker, i));
             }

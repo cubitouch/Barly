@@ -20,6 +20,16 @@ namespace Barly.Business
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public bool IsValid { get; set; }
+        public string Foursquare { get; set; }
+        public string FoursquareID
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Foursquare))
+                    return "";
+                return Foursquare.Split('/').Last();
+            }
+        }
         public bool IsOpenNow
         {
             get
@@ -79,6 +89,8 @@ namespace Barly.Business
             Latitude = double.Parse(row.Values["Latitude"].ToString());
             Longitude = double.Parse(row.Values["Longitude"].ToString());
             IsValid = bool.Parse(row.Values["Validé"].ToString());
+            if (row.Values["Foursquare"] != null)
+                Foursquare = row.Values["Foursquare"].ToString();
 
             OpeningTimes = new List<OpeningTime>();
             OpeningTimes.Add(ExtractOpeningTime(row, DayOfWeek.Monday, "Lundi", DateTime.Today.DayOfWeek == DayOfWeek.Monday));

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
+using Barly.Business;
 using Barly.Models;
 
 namespace Barly.Controllers
@@ -55,6 +57,29 @@ namespace Barly.Controllers
             var model = new SearchResultModel(id);
             //ViewBag.Filters = model.Filters;
             return View("Search", model);
+        }
+        
+        public JsonResult GetFoursquareInfos(int id)
+        {
+            var backOffice = new Business.BackOffice();
+
+            Location location = backOffice.Locations.FirstOrDefault(l => l.Id == id);
+            if (string.IsNullOrWhiteSpace(location.FoursquareID))
+                return Json(new FoursquareVenue(), JsonRequestBehavior.AllowGet);
+
+            string cacheKey = "foursquare-venue-" + location.FoursquareID;
+            var cacheItem = (FoursquareVenue)WebCache.Get(cacheKey);
+            if (cacheItem == null)
+            {
+                FoursquareVenue venue = new FoursquareVenue(location.FoursquareID);
+                WebCache.Set(cacheKey, venue, 1440); // one day cache
+                return Json(venue, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(cacheItem, JsonRequestBehavior.AllowGet);
+            }
+
         }
     }
 }

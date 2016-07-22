@@ -642,3 +642,31 @@ header.hide {
     visibility: visible;
     width: 100%;
 }
+
+.mdl-card-foursquare .foursquare-phone,
+.mdl-card-foursquare .foursquare-website,
+/*.mdl-card-foursquare .foursquare-phone,*/
+.mdl-card-foursquare .foursquare-price {
+    display: none;
+}
+
+
+    .mdl-card-foursquare .foursquare-phone .mdl-list__item-primary-content,
+    .mdl-card-foursquare .foursquare-website .mdl-list__item-primary-content,
+    /*.mdl-card-foursquare .foursquare-phone .mdl-list__item-primary-content,*/
+    .mdl-card-foursquare .foursquare-price .mdl-list__item-primary-content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+.mdl-card-foursquare .foursquare-price-value .mdl-list__item-icon {
+    margin-right: 0;
+}
+
+.mdl-list .mdl-list__item a {
+    text-decoration: none;
+    display: flex;
+    width: 100%;
+    color:inherit;
+    font-weight:inherit;
+}

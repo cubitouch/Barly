@@ -51,7 +51,7 @@ namespace Barly.Models
                 {
                     var searchCoordinate = new GeoCoordinate(latitude, longitude);
                     var locationCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);
-                    if (searchCoordinate.GetDistanceTo(locationCoordinate) < zone && location.IsValid)
+                    if (searchCoordinate.GetDistanceTo(locationCoordinate) < zone && location.IsValid && !Locations.Contains(location))
                     {
                         Locations.Add(location);
                     }
@@ -107,7 +107,7 @@ namespace Barly.Models
                     var searchCoordinate = MidPoint(locationCoordinateA, locationCoordinateB);
 
                     var locationCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);
-                    if (searchCoordinate.GetDistanceTo(locationCoordinate) < zone && location.IsValid)
+                    if (searchCoordinate.GetDistanceTo(locationCoordinate) < zone && location.IsValid && !Locations.Contains(location))
                     {
                         Locations.Add(location);
                     }
