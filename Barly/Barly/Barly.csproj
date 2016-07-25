@@ -184,6 +184,7 @@
     <Compile Include="LoginCallback.ashx.cs">
       <DependentUpon>LoginCallback.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilterEditModel.cs" />
     <Compile Include="Models\SearchResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

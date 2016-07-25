@@ -21,9 +21,10 @@ namespace Barly.Controllers
             return View();
         }
 
-        public ActionResult Filter()
+        public ActionResult Filter(IList<string> zipcodes)
         {
-            return View();
+            var model = new FilterEditModel(zipcodes);
+            return View(model);
         }
 
         public ActionResult Between()
@@ -58,7 +59,7 @@ namespace Barly.Controllers
             //ViewBag.Filters = model.Filters;
             return View("Search", model);
         }
-        
+
         public JsonResult GetFoursquareInfos(int id)
         {
             var backOffice = new Business.BackOffice();

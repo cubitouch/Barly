@@ -580,6 +580,16 @@ dialog img {
     border-right: 1px solid rgba(255,255,255,0.6);
 }
 
+.mdl-navigation a.mdl-button .material-icons {
+    margin-top: 20px;
+}
+@media screen and (max-width: 1024px) {
+    .mdl-navigation a.mdl-button .material-icons {
+        margin-top: 15px !important;
+    }
+}
+
+
 header.hide {
     display: none;
 }
@@ -667,6 +677,6 @@ header.hide {
     text-decoration: none;
     display: flex;
     width: 100%;
-    color:inherit;
-    font-weight:inherit;
+    color: inherit;
+    font-weight: inherit;
 }
