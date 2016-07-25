@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Web.Hosting;
 using RowShare.Api;
 
 namespace Barly.Business
@@ -24,15 +21,34 @@ namespace Barly.Business
             }
         }
 
+        private object cacheLock = new object();
         private void LoadLocations()
         {
             List locationTable = List.GetListById(_rowshareTableId);
-            locationTable.LoadRows();
+            string cacheFilename = HostingEnvironment.MapPath(string.Format("~/App_Data/locations/{0}.json", locationTable.LastUpdateDateUtc.Ticks.ToString()));
+            bool hasNewCache = false;
+            if (System.IO.File.Exists(cacheFilename))
+            {
+                lock (cacheLock)
+                {
+                    locationTable.LoadRows(System.IO.File.ReadAllText(cacheFilename));
+                }
+            }
+            else
+            {
+                locationTable.LoadRows();
+                hasNewCache = true;
+            }
 
             _locations = new List<Location>();
             foreach (Row row in locationTable.Rows)
             {
                 _locations.Add(new Location(row));
+            }
+            if (hasNewCache)
+            {
+                locationTable.CacheRowsToFS(cacheFilename);
+                locationTable.ClearCache(cacheFilename, locationTable.LastUpdateDateUtc);
             }
         }
     }

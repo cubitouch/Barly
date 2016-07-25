@@ -1,4 +1,5 @@
-﻿* {
+﻿
+* {
     box-sizing: border-box;
 }
 
@@ -268,7 +269,7 @@ a {
     .search-content-home label {
         display: block;
         position: relative;
-        margin: 6px;
+        /*margin: 6px;*/
         padding: 12px;
         background-color: #23232b;
         color: #ffffff;
@@ -410,6 +411,13 @@ a {
     padding: 0;
 }
 
+@media screen and (min-width: 840px) {
+    #bar-map {
+        float: left;
+        width: 50%;
+    }
+}
+
 .search-content {
     height: 100%;
 }
@@ -417,10 +425,6 @@ a {
 @media screen and (max-width: 1024px) {
     .search-content {
         padding-top: 56px;
-    }
-
-    .bar.open {
-        padding-top: 56px !important;
     }
 }
 
@@ -528,19 +532,52 @@ dialog img {
     overflow: scroll;
 }
 
-.bar.open {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    margin: 0;
-    padding-top: 64px;
-    display: block !important;
-    overflow: auto;
+.bar {
+    min-height: initial;
+    cursor: pointer;
+    height: 176px;
 }
 
+    .bar .mdl-card__title-text {
+        text-align: center;
+        /*-webkit-align-self: flex-initial !important;
+        -ms-flex-item-align: initial !important;
+        align-self: initial !important;*/
+        display: block;
+    }
+
+    .bar.open .mdl-card__title-text {
+        -webkit-align-self: flex-end !important;
+        -ms-flex-item-align: end !important;
+        align-self: end !important;
+    }
+
+
+    .bar.open {
+        cursor: default;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        margin: 0;
+        display: block !important;
+        overflow: auto;
+    }
+
+@media screen and (min-width: 840px) {
+    .bar.open {
+        width: 50%;
+        top: 56px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .bar.open {
+        top: 64px;
+    }
+}
 .bar .opener {
     display: inline-block;
 }
@@ -557,9 +594,6 @@ dialog img {
     display: inline-block;
 }
 
-.bar.open .mdl-card__menu {
-    margin-top: 64px;
-}
 
 
 .search-content.map #bar-map {
@@ -570,23 +604,34 @@ dialog img {
     padding: 0;
 }
 
+
+@media screen and (max-width: 839px) {
     .search-content.map #bar-list .bar {
         display: none;
     }
 
-.search-content.list #bar-map {
-    display: none;
+    .search-content.list #bar-map {
+        display: none;
+    }
 }
+
+@media screen and (min-width: 840px) {
+    #bar-list {
+        width: 50%;
+        display: flex !important;
+        float: left;
+        height: 100%;
+        overflow: scroll;
+    }
+
+    .search-content.map #bar-list .bar {
+        display: flex;
+    }
+}
+
 
 .search-content.list #bar-list .bar {
     display: block;
-}
-
-#maplistTrigger {
-    /*position: fixed;
-    top: 72px;
-    right: 16px;
-    z-index: 10;*/
 }
 
 #lander {
@@ -630,7 +675,7 @@ dialog img {
 
 .mdl-list .active {
     color: White;
-    background-color: rgb(255, 64, 129);
+    background-color: rgba(255, 64, 129,0.5);
 }
 
     .mdl-list .active i,
@@ -644,4 +689,111 @@ dialog img {
     border-radius: 0;
     border-left: 1px solid rgba(255,255,255,0.6);
     border-right: 1px solid rgba(255,255,255,0.6);
+}
+
+.mdl-navigation a.mdl-button .material-icons {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+    .mdl-navigation a.mdl-button .material-icons {
+        margin-top: 15px !important;
+    }
+}
+
+
+    header.hide {
+        display: flex;
+    }
+@media screen and (max-width: 839px) {
+    header.hide {
+        display: none !important;
+    }
+}
+
+.mdl-card-list {
+    width: 100%;
+    border-top: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.mdl-card-adress {
+    background-color: rgb(47, 46, 60);
+    border: none;
+}
+
+    .mdl-card-adress .mdl-list {
+        background: none;
+    }
+
+    .mdl-card-adress .material-icons,
+    .mdl-card-adress span {
+        color: white;
+    }
+
+    .mdl-card-adress .mdl-list {
+        background: none;
+    }
+
+    .mdl-card-adress .material-icons,
+    .mdl-card-adress span {
+        /*color: white;*/
+    }
+
+.mdl-mini-footer {
+    padding: 0;
+}
+
+    .mdl-mini-footer .mdl-mini-footer--middle-section {
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+        padding: 2px 0;
+    }
+
+        .mdl-mini-footer .mdl-mini-footer--middle-section .mdl-button.third {
+            width: calc( 32% );
+        }
+
+#betweenContainer .mdl-textfield {
+    width: 100%;
+}
+
+#betweenContainer .mdl-button {
+    width: 100%;
+}
+
+#betweenContainer .mdl-textfield__label.is-success:after {
+    background-color: greenyellow;
+    left: 0;
+    visibility: visible;
+    width: 100%;
+}
+
+.mdl-card-foursquare .foursquare-phone,
+.mdl-card-foursquare .foursquare-website,
+/*.mdl-card-foursquare .foursquare-phone,*/
+.mdl-card-foursquare .foursquare-price {
+    display: none;
+}
+
+
+    .mdl-card-foursquare .foursquare-phone .mdl-list__item-primary-content,
+    .mdl-card-foursquare .foursquare-website .mdl-list__item-primary-content,
+    /*.mdl-card-foursquare .foursquare-phone .mdl-list__item-primary-content,*/
+    .mdl-card-foursquare .foursquare-price .mdl-list__item-primary-content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+.mdl-card-foursquare .foursquare-price-value .mdl-list__item-icon {
+    margin-right: 0;
+}
+
+.mdl-list .mdl-list__item a {
+    text-decoration: none;
+    display: flex;
+    width: 100%;
+    color: inherit;
+    font-weight: inherit;
 }

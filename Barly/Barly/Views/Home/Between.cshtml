@@ -1,0 +1,83 @@
+﻿@using System.Security.Claims;
+@{
+    ViewBag.Title = "Barly";
+}
+<main class="mdl-layout__content home">
+    <div class="page-content">
+        <div class="content-home">
+            <form id="search" action="/Home/SearchFromBetween" method="get" class="form-horizontal">
+                <div id="betweenContainer" class="mdl-grid">
+                    <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
+                        <input class="mdl-textfield__input" type="text" id="addressA">
+                        <label class="mdl-textfield__label" for="addressA" id="addressALabel"></label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
+                        <input class="mdl-textfield__input" type="text" id="addressB">
+                        <label class="mdl-textfield__label" for="addressB" id="addressBLabel"></label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <input type="hidden" value="0" name="latA" id="latA" />
+                        <input type="hidden" value="0" name="lngA" id="lngA" />
+                        <input type="hidden" value="0" name="latB" id="latB" />
+                        <input type="hidden" value="0" name="lngB" id="lngB" />
+                        <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                            <i class="material-icons">compare_arrows</i>&nbsp;Trouver
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD61F5jFB_8ql02dWz6ql73Ve076nTEuQE&libraries=places"></script>
+            <script>
+                $(function () {
+                    $('#addressA').change(function () {
+                        $('#addressALabel').removeClass('is-success');
+                        $('#latA').val(0);
+                        $('#lngA').val(0);
+                    });
+                    $('#addressB').change(function () {
+                        $('#addressBLabel').removeClass('is-success');
+                        $('#latB').val(0);
+                        $('#lngB').val(0);
+                    });
+                    var autocompleteA = new google.maps.places.Autocomplete(document.getElementById('addressA'));
+                    autocompleteA.addListener('place_changed', function () {
+                        var place = autocompleteA.getPlace();
+
+                        if (!place.geometry)
+                            return;
+
+                        $('#latA').val(place.geometry.location.lat());
+                        $('#lngA').val(place.geometry.location.lng());
+                        $('#addressALabel').addClass('is-success');
+                    });
+                    var autocompleteB = new google.maps.places.Autocomplete(document.getElementById('addressB'));
+                    autocompleteB.addListener('place_changed', function () {
+                        var place = autocompleteB.getPlace();
+
+                        $('#addressBLabel').removeClass('is-success');
+                        if (!place.geometry)
+                            return;
+
+                        $('#latB').val(place.geometry.location.lat());
+                        $('#lngB').val(place.geometry.location.lng());
+                        $('#addressBLabel').addClass('is-success');
+                    });
+
+                    $('#submit').click(function () {
+                        $("#search").submit();
+                    });
+                    $("#search").submit(function (event) {
+                        console.log($('#latA').val(), $('#lngA').val(), $('#latB').val(), $('#lngB').val());
+                        if ($('#latA').val() == 0 ||
+                            $('#lngA').val() == 0 ||
+                            $('#latB').val() == 0 ||
+                            $('#lngB').val() == 0) {
+                            event.preventDefault();
+                            return false;
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</main>
