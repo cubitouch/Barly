@@ -387,10 +387,6 @@ a {
     .search-content {
         padding-top: 56px;
     }
-
-    header.hide {
-        display: none !important;
-    }
 }
 
 
@@ -505,10 +501,15 @@ dialog img {
 @media screen and (min-width: 840px) {
     .bar.open {
         width: 50%;
-        top: 64px;
+        top: 56px;
     }
 }
 
+@media screen and (min-width: 1024px) {
+    .bar.open {
+        top: 64px;
+    }
+}
 .bar .opener {
     display: inline-block;
 }
@@ -624,9 +625,12 @@ dialog img {
 }
 
 
+    header.hide {
+        display: flex;
+    }
 @media screen and (max-width: 839px) {
     header.hide {
-        display: none;
+        display: none !important;
     }
 }
 
