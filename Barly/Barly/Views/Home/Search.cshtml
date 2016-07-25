@@ -5,11 +5,10 @@
 }
 <main class="mdl-layout__content home">
     <div class="search-content map">
-        <div id="bar-map"></div>
         <div id="bar-list" class="mdl-grid">
             @foreach (Location location in Model.Locations)
             {
-                <div data-id="@location.Id" class="bar mdl-card mdl-shadow--2dp mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+                <div data-id="@location.Id" class="bar mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
                     <div class="mdl-card__title" style="background: url('@location.Picture') center / cover;">
                         <h2 class="mdl-card__title-text">@location.Name</h2>
                     </div>
@@ -116,8 +115,20 @@
                 </div>
             }
         </div>
+        <div id="bar-map"></div>
     </div>
     <script>
+
+        function openBar(bar){
+            $('.bar').removeClass('open');
+            if (!bar.hasClass('open')) {
+                bar.addClass('open');
+                $('header').addClass('hide');
+
+                // get foursquare infos
+                addFoursquareData(bar);
+            }
+        }
         var locations = [
             @foreach (Location location in Model.Locations)
         {
@@ -188,17 +199,11 @@
 
                 $('.bar').click(function(){
                     var bar = $(this);
-                    if (!bar.hasClass('open')) {
-                        bar.addClass('open');
-                        $('header').addClass('hide');
-
-                        // get foursquare infos
-                        addFoursquareData(bar);
-                    }
+                    openBar(bar);
                 });
 
                 $('.bar .close-button').click(function(e){
-                    $(this).closest('.bar').removeClass('open');
+                    $('.bar').removeClass('open');
                     $('header').removeClass('hide');
                     e.preventDefault();
                     return false;
@@ -236,11 +241,7 @@
                         infowindow.setContent(locations[i].Name);
                         infowindow.open(map, marker);
                         var bar = $('.bar[data-id="'+locations[i].Id+'"]');
-                        bar.addClass('open');
-                        $('header').addClass('hide');
-
-                        // get foursquare infos
-                        addFoursquareData(bar);
+                        openBar(bar);
                     }
                 })(marker, i));
             }
