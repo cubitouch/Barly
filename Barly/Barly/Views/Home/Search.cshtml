@@ -143,6 +143,15 @@
             },</text>
         }
         ];
+        var positions =[
+            @foreach (KeyValuePair<double,double> location in Model.Positions)
+            {
+        <text>{
+                Latitude: @location.Key.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                Longitude: @location.Value.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            },</text>
+            }
+        ];
         //console.log(locations);
         function addFoursquareData(b){
             var bar = $(b);
@@ -183,8 +192,8 @@
                 });
         }
         $(function(){
+            $('#filterTrigger').show();
             if (locations.length>0){
-                $('#filterTrigger').show();
                 $('#maplistTrigger').show();
                 $('#maplistTrigger').click(function(){
                     $('.search-content').toggleClass('map');
@@ -245,6 +254,16 @@
                     }
                 })(marker, i));
             }
+            for (i = 0; i < positions.length; i++) {
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(positions[i].Latitude, positions[i].Longitude),
+                    map: map,
+                    icon:'http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-blue.png'
+                });
+                markers.push(marker);
+                bounds.extend(marker.position);
+            }
+
             /// need api key
             var markerCluster = new MarkerClusterer(map, markers);
 

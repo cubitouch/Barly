@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using Barly.App_Start;
 using Barly.Business;
 using Barly.Models;
 
 namespace Barly.Controllers
 {
+    //[Internationalization]
     public class HomeController : Controller
     {
         public ActionResult Index()
