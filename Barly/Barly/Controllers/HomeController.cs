@@ -20,9 +20,9 @@ namespace Barly.Controllers
             return View();
         }
 
-        public ActionResult Filter(IList<string> zipcodes)
+        public ActionResult Filter(IList<string> zipcodes, string open)
         {
-            var model = new FilterEditModel(zipcodes);
+            var model = new FilterEditModel(zipcodes, open);
             return View(model);
         }
 
@@ -31,9 +31,9 @@ namespace Barly.Controllers
             return View();
         }
 
-        public ActionResult Search(IList<string> zipcodes)
+        public ActionResult Search(IList<string> zipcodes, string open)
         {
-            var model = new SearchResultModel(zipcodes);
+            var model = new SearchResultModel(new FilterEditModel(zipcodes, open));
             //ViewBag.Filters = model.Filters;
             return View(model);
         }

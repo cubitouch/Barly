@@ -9,30 +9,23 @@ namespace Barly.Models
     {
         public IList<Location> Locations { get; set; }
         public IDictionary<double, double> Positions { get; set; }
-        public IList<string> Filters { get; set; }
 
         public SearchResultModel()
         {
             Locations = new List<Location>();
             Positions = new Dictionary<double, double>();
-            Filters = new List<string>();
         }
 
-        public SearchResultModel(IList<string> zipcodes) : this()
+        public SearchResultModel(FilterEditModel filters) : this()
         {
             var backOffice = new BackOffice();
 
             foreach (Location location in backOffice.Locations)
             {
-                if (zipcodes.Contains(location.ZipCode) && location.IsValid)
+                if (filters.ZipCodes.Contains(location.ZipCode) && location.IsValid && (!filters.OnlyOpenBars || location.IsOpenNow))
                 {
                     Locations.Add(location);
                 }
-            }
-            
-            foreach (string zipcode in zipcodes)
-            {
-                Filters.Add(zipcode);
             }
         }
 
@@ -120,7 +113,7 @@ namespace Barly.Models
                 if (location.Id == id && location.IsValid)
                 {
                     Locations.Add(location);
-                    Filters.Add(location.Name);
+                    //Filters.Add(location.Name);
                 }
             }
 

@@ -12,94 +12,95 @@
                     <div class="mdl-card__title" style="background: url('@location.Picture') center / cover;">
                         <h2 class="mdl-card__title-text">@location.Name</h2>
                     </div>
-
-                    <div class="closer mdl-card-list mdl-card-state">
-                        <ul class="mdl-list">
-                            <li class="mdl-list__item">
-                                <span class="mdl-list__item-primary-content">
-                                    <i class="material-icons mdl-list__item-icon">@(location.IsOpenNow ? "schedule" : "watch_later")</i>
-                                    @(location.IsOpenNow ? "Ouvert" : "Fermé") en ce moment
-                                </span>
-                            </li>
-                        </ul>
-                        @*<br />*@
-                        @*@Html.Raw(location.Description)*@
-                    </div>
-                    <div class="closer mdl-card-list">
-                        <ul class="mdl-list">
-                            @foreach (OpeningTime openingTime in location.OpeningTimes)
-                            {
-                                <li class="mdl-list__item mdl-list__item--two-line @(openingTime.IsToday?"active":"")">
-                                    <span class="mdl-list__item-primary-content">
-                                        <i class="material-icons mdl-list__item-icon">@(openingTime.IsOpen ? "local_bar" : "")</i>
-                                        <span>@openingTime.DayOfWeekMessage</span>
-                                        <span class="mdl-list__item-sub-title">@openingTime.HoursFormat</span>
-                                    </span>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                    <div class="closer mdl-card-list mdl-card-adress">
-                        <a href="http://maps.google.com/maps?daddr=@location.Latitude,@location.Longitude" target="_blank">
+                    <div class="scrollable">
+                        <div class="closer mdl-card-list mdl-card-state">
                             <ul class="mdl-list">
                                 <li class="mdl-list__item">
                                     <span class="mdl-list__item-primary-content">
-                                        <i class="material-icons mdl-list__item-icon">directions_run</i>
-                                        @Html.Raw(location.Address)
-                                    </span>
-                                    <span class="mdl-list__item-secondary-action">
-                                        <i class="material-icons">navigate_next</i>
+                                        <i class="material-icons mdl-list__item-icon">@(location.IsOpenNow ? "schedule" : "watch_later")</i>
+                                        @(location.IsOpenNow ? "Ouvert" : "Fermé") en ce moment
                                     </span>
                                 </li>
                             </ul>
-                        </a>
-                    </div>
-                    <div class="mdl-card-foursquare" style="display: none;">
+                            @*<br />*@
+                            @*@Html.Raw(location.Description)*@
+                        </div>
                         <div class="closer mdl-card-list">
                             <ul class="mdl-list">
-                                <li class="mdl-list__item foursquare-price">
-                                    <span class="mdl-list__item-primary-content">
-                                        <i class="material-icons mdl-list__item-icon">euro_symbol</i>
-                                        <span class="foursquare-price-value"></span>
-                                    </span>
-                                </li>
-                                <li class="mdl-list__item foursquare-phone">
-                                    <a href="tel:" target="_blank" class="foursquare-phone-control">
+                                @foreach (OpeningTime openingTime in location.OpeningTimes)
+                            {
+                                    <li class="mdl-list__item mdl-list__item--two-line @(openingTime.IsToday?"active":"")">
                                         <span class="mdl-list__item-primary-content">
-                                            <i class="material-icons mdl-list__item-icon">phone</i>
-                                            <span class="foursquare-phone-value"></span>
+                                            <i class="material-icons mdl-list__item-icon">@(openingTime.IsOpen ? "local_bar" : "")</i>
+                                            <span>@openingTime.DayOfWeekMessage</span>
+                                            <span class="mdl-list__item-sub-title">@openingTime.HoursFormat</span>
                                         </span>
-                                        <span class="mdl-list__item-secondary-action">
-                                            <i class="material-icons">navigate_next</i>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="mdl-list__item foursquare-website">
-                                    <a href="#" target="_blank" class="foursquare-website-control">
-                                        <span class="mdl-list__item-primary-content">
-                                            <i class="material-icons mdl-list__item-icon">language</i>
-                                            <span class="foursquare-website-value"></span>
-                                        </span>
-                                        <span class="mdl-list__item-secondary-action">
-                                            <i class="material-icons">navigate_next</i>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="mdl-list__item">
-                                    <a href="@location.Foursquare" target="_blank">
-                                        <span class="mdl-list__item-primary-content">
-                                            <i class="material-icons mdl-list__item-icon">store</i>
-                                            Voir sur Foursquare
-                                        </span>
-                                        <span class="mdl-list__item-secondary-action">
-                                            <i class="material-icons">navigate_next</i>
-                                        </span>
-                                    </a>
-                                </li>
+                                    </li>
+                            }
                             </ul>
                         </div>
-                        @*<br />*@
-                        @*@Html.Raw(location.Description)*@
+                        <div class="closer mdl-card-list mdl-card-adress">
+                            <a href="http://maps.google.com/maps?daddr=@location.Latitude,@location.Longitude" target="_blank">
+                                <ul class="mdl-list">
+                                    <li class="mdl-list__item">
+                                        <span class="mdl-list__item-primary-content">
+                                            <i class="material-icons mdl-list__item-icon">directions_run</i>
+                                            @Html.Raw(location.Address)
+                                        </span>
+                                        <span class="mdl-list__item-secondary-action">
+                                            <i class="material-icons">navigate_next</i>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </a>
+                        </div>
+                        <div class="mdl-card-foursquare" style="display: none;">
+                            <div class="closer mdl-card-list">
+                                <ul class="mdl-list">
+                                    <li class="mdl-list__item foursquare-price">
+                                        <span class="mdl-list__item-primary-content">
+                                            <i class="material-icons mdl-list__item-icon">euro_symbol</i>
+                                            <span class="foursquare-price-value"></span>
+                                        </span>
+                                    </li>
+                                    <li class="mdl-list__item foursquare-phone">
+                                        <a href="tel:" target="_blank" class="foursquare-phone-control">
+                                            <span class="mdl-list__item-primary-content">
+                                                <i class="material-icons mdl-list__item-icon">phone</i>
+                                                <span class="foursquare-phone-value"></span>
+                                            </span>
+                                            <span class="mdl-list__item-secondary-action">
+                                                <i class="material-icons">navigate_next</i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="mdl-list__item foursquare-website">
+                                        <a href="#" target="_blank" class="foursquare-website-control">
+                                            <span class="mdl-list__item-primary-content">
+                                                <i class="material-icons mdl-list__item-icon">language</i>
+                                                <span class="foursquare-website-value"></span>
+                                            </span>
+                                            <span class="mdl-list__item-secondary-action">
+                                                <i class="material-icons">navigate_next</i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="mdl-list__item">
+                                        <a href="@location.Foursquare" target="_blank">
+                                            <span class="mdl-list__item-primary-content">
+                                                <i class="material-icons mdl-list__item-icon">store</i>
+                                                Voir sur Foursquare
+                                            </span>
+                                            <span class="mdl-list__item-secondary-action">
+                                                <i class="material-icons">navigate_next</i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @*<br />*@
+                            @*@Html.Raw(location.Description)*@
+                        </div>
                     </div>
                     <div class="mdl-card__menu">
                         @*<a class="opener mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="$('.bar[data-id=@location.Id]').addClass('open');">
