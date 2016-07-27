@@ -8,7 +8,7 @@
         <div id="bar-list" class="mdl-grid">
             @foreach (Location location in Model.Locations)
             {
-                <div data-id="@location.Id" class="bar mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+                <div data-id="@location.Id" class="bar mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
                     <div class="mdl-card__title" style="background: url('@location.Picture') center / cover;">
                         <h2 class="mdl-card__title-text">@location.Name</h2>
                     </div>
