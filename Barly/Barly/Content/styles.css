@@ -880,6 +880,10 @@ header.hide {
 }
 
 
+.mdl-card-google .mdl-list__item img {
+    width: 24px;
+    margin-right: 4px;
+}
 
 /* GOOD MEDIA QUERIES */
 
