@@ -1,5 +1,4 @@
-﻿@using System.Security.Claims;
-@{
+﻿@{
     ViewBag.Title = "Barly";
 }
 <main class="mdl-layout__content home">
@@ -7,6 +6,12 @@
         <div class="content-home">
             <form id="search" action="/Home/SearchFromBetween" method="get" class="form-horizontal">
                 <div id="betweenContainer" class="mdl-grid">
+                    <div class="mdl-cell--12-col">
+                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="open">
+                            <input type="checkbox" id="open" name="open" class="mdl-switch__input">
+                            <span class="mdl-switch__label">Uniquement les bars ouverts</span>
+                        </label>
+                    </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
                         <input class="mdl-textfield__input" type="text" id="addressA">
                         <label class="mdl-textfield__label" for="addressA" id="addressALabel"></label>

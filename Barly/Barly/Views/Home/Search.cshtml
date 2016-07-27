@@ -28,7 +28,7 @@
                         <div class="closer mdl-card-list">
                             <ul class="mdl-list">
                                 @foreach (OpeningTime openingTime in location.OpeningTimes)
-                            {
+                                {
                                     <li class="mdl-list__item mdl-list__item--two-line @(openingTime.IsToday?"active":"")">
                                         <span class="mdl-list__item-primary-content">
                                             <i class="material-icons mdl-list__item-icon">@(openingTime.IsOpen ? "local_bar" : "")</i>
@@ -36,7 +36,7 @@
                                             <span class="mdl-list__item-sub-title">@openingTime.HoursFormat</span>
                                         </span>
                                     </li>
-                            }
+                                }
                             </ul>
                         </div>
                         <div class="closer mdl-card-list mdl-card-adress">
@@ -101,6 +101,11 @@
                             @*<br />*@
                             @*@Html.Raw(location.Description)*@
                         </div>
+                        <div class="mdl-card-google" style="display: none;">
+                            <div class="closer mdl-card-list">
+                                <ul class="mdl-list"></ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="mdl-card__menu">
                         @*<a class="opener mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="$('.bar[data-id=@location.Id]').addClass('open');">
@@ -126,8 +131,8 @@
                 bar.addClass('open');
                 $('header').addClass('hide');
 
-                // get foursquare infos
-                addFoursquareData(bar);
+                // get foursquare and google infos
+                addExternalData(bar);
             }
         }
         var locations = [
@@ -154,41 +159,59 @@
             }
         ];
         //console.log(locations);
-        function addFoursquareData(b){
+        function addExternalData(b){
             var bar = $(b);
 
             if (bar.find('.mdl-card-foursquare:visible').length == 0)
-                $.get('/Home/GetFoursquareInfos?id=' + bar.data('id') ,function(data){
-                    //console.log(data);
-                    if (data.Id != ''){
-                        var hasData=false;
-                        if (data.Phone != null && data.Phone != ''){
-                            hasData=true;
+                $.get('/Home/GetExternalInfos?id=' + bar.data('id') ,function(data){
+                    console.log(data);
+                    var dataFoursquare = data.Foursquare;
+                    if (dataFoursquare && dataFoursquare.Id != ''){
+                        var hasDataFoursquare=false;
+                        if (dataFoursquare.Phone != null && dataFoursquare.Phone != ''){
+                            hasDataFoursquare=true;
                             bar.find('.foursquare-phone').css('display','flex');
-                            bar.find('.foursquare-phone-value').text(data.Phone);
-                            bar.find('.foursquare-phone-control').attr('href','tel:'+data.Phone);
+                            bar.find('.foursquare-phone-value').text(dataFoursquare.Phone);
+                            bar.find('.foursquare-phone-control').attr('href','tel:'+dataFoursquare.Phone);
                         }
-                        if (data.Website != null && data.Website != ''){
-                            hasData=true;
+                        if (dataFoursquare.Website != null && dataFoursquare.Website != ''){
+                            hasDataFoursquare=true;
                             bar.find('.foursquare-website').css('display','flex');
-                            bar.find('.foursquare-website-value').text(data.Website);
-                            bar.find('.foursquare-website-control').attr('href',data.Website);
+                            bar.find('.foursquare-website-value').text(dataFoursquare.Website);
+                            bar.find('.foursquare-website-control').attr('href',dataFoursquare.Website);
                         }
-                        if (data.Price != 0){
-                            hasData=true;
+                        if (dataFoursquare.Price != 0){
+                            hasDataFoursquare=true;
                             bar.find('.foursquare-price').css('display','flex');
                             var html = '';
-                            for (var i = 0; i< data.Price; i++){
+                            for (var i = 0; i< dataFoursquare.Price; i++){
                                 html += '<i class="material-icons mdl-list__item-icon">star</i>';
                             }
-                            for (var i = 0; i< 4-data.Price; i++){
+                            for (var i = 0; i< 4-dataFoursquare.Price; i++){
                                 html += '<i class="material-icons mdl-list__item-icon">star_border</i>';
                             }
                             bar.find('.foursquare-price-value').html(html);
                         }
 
-                        if (hasData)
+                        if (hasDataFoursquare)
                             bar.find('.mdl-card-foursquare').show();
+                    }
+                    var dataGoogle = data.Google;
+                    console.log(dataGoogle.Subways);
+                    if (dataGoogle && dataGoogle.Subways.length>0 && bar.find('.mdl-card-google:visible').length==0){
+                        for (var i = 0; i<dataGoogle.Subways.length; i++){
+                            var html = '';
+                            html += '<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class="material-icons mdl-list__item-icon">subway</i>';
+                            html += dataGoogle.Subways[i].name
+                            html += '&nbsp;';
+                            for (var j = 0; j < dataGoogle.Subways[i].lines.length; j++){
+                                html += '<img src="/Content/img/ratp/M_'+dataGoogle.Subways[i].lines[j]+'.png">';
+                            }
+                            html += '</span></li>';
+
+                            bar.find('.mdl-card-google .mdl-list').append(html);
+                        }
+                        bar.find('.mdl-card-google').show();
                     }
                 });
         }
@@ -211,6 +234,12 @@
                     var bar = $(this);
                     openBar(bar);
                 });
+                $('.bar').mouseover(function(){
+                    activeBarItem($(this).data('id'),true,false);
+                });
+                $('.bar').mouseout(function(){
+                    activeBarItem($(this).data('id'),false,false);
+                });
 
                 $('.bar .close-button').click(function(e){
                     $('.bar').removeClass('open');
@@ -221,9 +250,41 @@
             }
         });
 
-        function initializeMap() {
-            var mapStyle = [{ "featureType": "landscape", "stylers": [{ "hue": "#FFBB00" }, { "saturation": 43.400000000000006 }, { "lightness": 37.599999999999994 }, { "gamma": 1 }] }, { "featureType": "road.highway", "stylers": [{ "hue": "#FFC200" }, { "saturation": -61.8 }, { "lightness": 45.599999999999994 }, { "gamma": 1 }] }, { "featureType": "road.arterial", "stylers": [{ "hue": "#FF0300" }, { "saturation": -100 }, { "lightness": 51.19999999999999 }, { "gamma": 1 }] }, { "featureType": "road.local", "stylers": [{ "hue": "#FF0300" }, { "saturation": -100 }, { "lightness": 52 }, { "gamma": 1 }] }, { "featureType": "water", "stylers": [{ "hue": "#0078FF" }, { "saturation": -13.200000000000003 }, { "lightness": 2.4000000000000057 }, { "gamma": 1 }] }, { "featureType": "poi", "stylers": [{ "hue": "#00FF6A" }, { "saturation": -1.0989010989011234 }, { "lightness": 11.200000000000017 }, { "gamma": 1 }] }];
+        var markers = [];
+        function activeBarItem(id, active, activeBar){
+            var iconDefault = "http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-b.png";
+            var iconActive = "http://mt.googleapis.com/vt/icon/name=icons/spotlight/spotlight-poi.png";
 
+            var marker = null;
+
+            for(var i  = 0; i<markers.length; i++){
+                if (markers[i].barId == id) {
+                    marker = markers[i];
+                }
+            }
+
+            if (marker){
+                var bar = $('.bar[data-id="'+id+'"]');
+                if (active){
+                    marker.setIcon(iconActive);
+                    if (activeBar){
+                        $('#bar-list').scrollTo(bar,400,{offset:-40, onAfter: function() {
+                            requestAnimationFrame(function() {
+                                $('.bar').removeClass('active');
+                                bar.addClass('active');
+                            });
+                        }});
+                    }
+                }
+                else {
+                    marker.setIcon(iconDefault);
+                    bar.removeClass('active');
+                }
+            }
+        }
+        function initializeMap() {
+            // https://snazzymaps.com/style/132/light-gray
+            var mapStyle = [{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#d3d3d3"}]},{"featureType":"transit","stylers":[{"color":"#808080"},{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#b3b3b3"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"weight":1.8}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"color":"#d7d7d7"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ebebeb"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#a7a7a7"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#efefef"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#696969"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#737373"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#d6d6d6"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"color":"#dadada"}]}];
             var mapOptions = {
                 zoom: 3,
                 styles: mapStyle,
@@ -234,13 +295,13 @@
             var bounds = new google.maps.LatLngBounds();
             var infowindow = new google.maps.InfoWindow();
 
-            var markers = [];
             for (i = 0; i < locations.length; i++) {
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i].Latitude, locations[i].Longitude),
                     map: map,
-                    //icon:'/images/ic_local_bar_2x.png'
+                    icon:'http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-b.png'
                 });
+                marker.barId = locations[i].Id;
                 markers.push(marker);
 
                 //extend the bounds to include each marker's position
@@ -254,6 +315,17 @@
                         openBar(bar);
                     }
                 })(marker, i));
+
+                google.maps.event.addListener(marker, 'mouseover', (function (marker, i) {
+                    return function () {
+                        activeBarItem(marker.barId,true,true);
+                    }
+                })(marker, i));
+                google.maps.event.addListener(marker, 'mouseout', (function (marker, i) {
+                    return function () {
+                        activeBarItem(marker.barId,false,true);
+                    }
+                })(marker, i));
             }
             for (i = 0; i < positions.length; i++) {
                 var marker = new google.maps.Marker({
@@ -261,7 +333,7 @@
                     map: map,
                     icon:'http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-blue.png'
                 });
-                markers.push(marker);
+                //markers.push(marker);
                 bounds.extend(marker.position);
             }
 

@@ -10,6 +10,8 @@ namespace Barly.Models
         public IList<Location> Locations { get; set; }
         public IDictionary<double, double> Positions { get; set; }
 
+        private const int _findNumberBarFromLocations = 5;
+
         public SearchResultModel()
         {
             Locations = new List<Location>();
@@ -17,6 +19,28 @@ namespace Barly.Models
         }
 
         public SearchResultModel(FilterEditModel filters) : this()
+        {
+            switch (filters.Mode)
+            {
+                case FilterMode.Geolocation:
+                    {
+                        SearchForGeolocation(filters);
+                        break;
+                    }
+                case FilterMode.Midway:
+                    {
+                        SearchForMidway(filters);
+                        break;
+                    }
+                default:
+                    {
+                        SearchForDefault(filters);
+                        break;
+                    }
+            }
+        }
+
+        private void SearchForDefault(FilterEditModel filters)
         {
             var backOffice = new BackOffice();
 
@@ -29,28 +53,43 @@ namespace Barly.Models
             }
         }
 
+        private void SearchForGeolocation(FilterEditModel filters)
+        {
+            InitLocationsByCoordinate(filters.PositionA, filters.OnlyOpenBars);
+            Positions.Add(filters.PositionA.Latitude, filters.PositionA.Longitude);
+        }
 
-        public SearchResultModel(double latitude, double longitude) : this()
+        private void SearchForMidway(FilterEditModel filters)
+        {
+            GeoCoordinate searchCoordinate = MidPoint(filters.PositionA, filters.PositionB);
+            Positions.Add(filters.PositionA.Latitude, filters.PositionA.Longitude);
+            Positions.Add(filters.PositionB.Latitude, filters.PositionB.Longitude);
+
+            InitLocationsByCoordinate(searchCoordinate, filters.OnlyOpenBars);
+        }
+
+        private void InitLocationsByCoordinate(GeoCoordinate coordinate, bool onlyOpen)
         {
             var backOffice = new Business.BackOffice();
 
             int zone = 0;
-            while (Locations.Count < findNumberBarFromLocations)
+            while (Locations.Count < _findNumberBarFromLocations)
             {
                 zone += 200;
                 foreach (Location location in backOffice.Locations)
                 {
-                    var searchCoordinate = new GeoCoordinate(latitude, longitude);
                     var locationCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);
-                    if (searchCoordinate.GetDistanceTo(locationCoordinate) < zone && location.IsValid && !Locations.Contains(location))
+                    if (coordinate.GetDistanceTo(locationCoordinate) < zone 
+                        && location.IsValid 
+                        && !Locations.Contains(location) 
+                        && (!onlyOpen || location.IsOpenNow))
                     {
                         Locations.Add(location);
                     }
+
                 }
             }
         }
-
-        private const int findNumberBarFromLocations = 5;
 
         private static double DegreesToRadians(double angle)
         {
@@ -79,30 +118,6 @@ namespace Barly.Models
 
             return midPoint;
         }
-        public SearchResultModel(double latitudeA, double longitudeA, double latitudeB, double longitudeB) : this()
-        {
-            var backOffice = new Business.BackOffice();
-            var locationCoordinateA = new GeoCoordinate(latitudeA, longitudeA);
-            var locationCoordinateB = new GeoCoordinate(latitudeB, longitudeB);
-            var searchCoordinate = MidPoint(locationCoordinateA, locationCoordinateB);
-            Positions.Add(locationCoordinateA.Latitude, locationCoordinateA.Longitude);
-            Positions.Add(locationCoordinateB.Latitude, locationCoordinateB.Longitude);
-
-            int zone = 0;
-            while (Locations.Count < findNumberBarFromLocations)
-            {
-                zone += 200;
-                foreach (Location location in backOffice.Locations)
-                {
-                    var locationCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);
-                    if (searchCoordinate.GetDistanceTo(locationCoordinate) < zone && location.IsValid && !Locations.Contains(location))
-                    {
-                        Locations.Add(location);
-                    }
-
-                }
-            }
-        }
 
         public SearchResultModel(int id) : this()
         {
@@ -113,7 +128,6 @@ namespace Barly.Models
                 if (location.Id == id && location.IsValid)
                 {
                     Locations.Add(location);
-                    //Filters.Add(location.Name);
                 }
             }
 

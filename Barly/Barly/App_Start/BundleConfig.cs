@@ -9,7 +9,8 @@ namespace Barly
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-2.2.2.min.js"));
+                        "~/Scripts/jquery-2.2.2.min.js",
+                        "~/Scripts/jquery.scrollTo.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

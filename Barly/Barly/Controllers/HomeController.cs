@@ -34,52 +34,54 @@ namespace Barly.Controllers
         public ActionResult Search(IList<string> zipcodes, string open)
         {
             var model = new SearchResultModel(new FilterEditModel(zipcodes, open));
-            //ViewBag.Filters = model.Filters;
             return View(model);
         }
 
-        public ActionResult SearchFromBetween(double latA, double lngA, double latB, double lngB)
+        public ActionResult SearchFromBetween(double latA, double lngA, double latB, double lngB, string open)
         {
-            var model = new SearchResultModel(latA, lngA, latB, lngB);
-            //ViewBag.Filters = model.Filters;
+            var model = new SearchResultModel(new FilterEditModel(latA, lngA, latB, lngB, open));
             return View("Search", model);
         }
 
-        public ActionResult SearchFromLocation(double latitude, double longitude)
+        public ActionResult SearchFromLocation(double latitude, double longitude, string open)
         {
-            var model = new SearchResultModel(latitude, longitude);
-            //ViewBag.Filters = model.Filters;
+            var model = new SearchResultModel(new FilterEditModel(latitude, longitude, open));
             return View("Search", model);
         }
 
         public ActionResult SearchFromBarId(int id)
         {
             var model = new SearchResultModel(id);
-            //ViewBag.Filters = model.Filters;
             return View("Search", model);
         }
 
-        public JsonResult GetFoursquareInfos(int id)
+        public JsonResult GetExternalInfos(int id)
         {
             var backOffice = new Business.BackOffice();
-
             Location location = backOffice.Locations.FirstOrDefault(l => l.Id == id);
-            if (string.IsNullOrWhiteSpace(location.FoursquareID))
-                return Json(new FoursquareVenue(), JsonRequestBehavior.AllowGet);
 
-            string cacheKey = "foursquare-venue-" + location.FoursquareID;
-            var cacheItem = (FoursquareVenue)WebCache.Get(cacheKey);
-            if (cacheItem == null)
+            FoursquareVenue cacheItemFoursquare = null;
+            if (!string.IsNullOrWhiteSpace(location.FoursquareID))
             {
-                FoursquareVenue venue = new FoursquareVenue(location.FoursquareID);
-                WebCache.Set(cacheKey, venue, 1440); // one day cache
-                return Json(venue, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return Json(cacheItem, JsonRequestBehavior.AllowGet);
+                string cacheKeyFoursquare = "foursquare-venue-" + location.FoursquareID;
+                cacheItemFoursquare = (FoursquareVenue)WebCache.Get(cacheKeyFoursquare);
+                if (cacheItemFoursquare == null)
+                {
+                    cacheItemFoursquare = new FoursquareVenue(location.FoursquareID);
+                    WebCache.Set(cacheKeyFoursquare, cacheItemFoursquare, 1440); // one day cache
+                }
             }
 
+            GoogleNearby cacheItemGoogle = null;
+            string cacheKeyGoogle = "google-nearby-" + location.Id;
+            cacheItemGoogle = (GoogleNearby)WebCache.Get(cacheKeyGoogle);
+            if (cacheItemGoogle == null)
+            {
+                cacheItemGoogle = new GoogleNearby(location.Latitude,location.Longitude);
+                WebCache.Set(cacheKeyGoogle, cacheItemGoogle, 1440); // one day cache
+            }
+
+            return Json(new LocationExternal(cacheItemFoursquare, cacheItemGoogle), JsonRequestBehavior.AllowGet);
         }
     }
 }

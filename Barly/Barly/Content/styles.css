@@ -570,7 +570,6 @@ dialog img {
         z-index: 10;
         margin: 0;
         display: block !important;
-        overflow: auto;
     }
 
 @media screen and (min-width: 840px) {
@@ -629,11 +628,12 @@ dialog img {
         display: flex !important;
         float: left;
         height: 100%;
-        overflow: scroll;
+        overflow: auto;
     }
 
     .search-content.map #bar-list .bar {
         display: flex;
+        /*transition: all .3s ease-out;*/
     }
 }
 
@@ -822,4 +822,19 @@ header.hide {
     .bar .scrollable {
         height: calc(100% - 176px);
     }
+}
+
+.bar:hover,
+.bar.active {
+    border: 6px solid white;
+}
+
+.bar,
+.bar.open {
+    border: none;
+}
+
+.mdl-card-google .mdl-list__item img{
+    width:24px;
+    margin-right:4px;
 }

@@ -50,22 +50,7 @@
                 <div class="mdl-layout__header-row">
                     <!-- Title -->
                     <span class="mdl-layout-title">
-                        @if (ViewBag.Filters != null)
-                        {
-                            <span id="filters">
-                                @foreach (string filter in ViewBag.Filters)
-                                {
-                                    <span class="label label-default">
-                                        @filter
-                                    </span>
-                                    @Html.Raw("&nbsp;")
-                                }
-                            </span>
-                        }
-                        else
-                        {
-                            <text>Barly</text>
-                        }
+                        <text>Barly</text>
                     </span>
                     <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
@@ -95,8 +80,9 @@
                     <a class="mdl-navigation__link" href="/Home/Index">Accueil</a>
                     <a class="mdl-navigation__link" href="/Home/Filter">Proximité</a>
                     <a class="mdl-navigation__link" href="/Home/Between">Mi-chemin</a>
+                    <a class="mdl-navigation__link" href="/Home/Tutorial">Tutoriel</a>
                     @*<a class="mdl-navigation__link" href="#">Goût</a>
-                    <a class="mdl-navigation__link" href="#">Découverte</a>*@
+                        <a class="mdl-navigation__link" href="#">Découverte</a>*@
                 </nav>
             </div>
             @RenderBody()

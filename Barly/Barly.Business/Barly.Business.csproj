@@ -47,7 +47,9 @@
   <ItemGroup>
     <Compile Include="BackOffice.cs" />
     <Compile Include="FoursquareVenue.cs" />
+    <Compile Include="GoogleNearby.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="LocationExternal.cs" />
     <Compile Include="OpeningTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeInterval.cs" />
