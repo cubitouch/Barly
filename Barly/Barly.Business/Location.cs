@@ -34,7 +34,8 @@ namespace Barly.Business
         {
             get
             {
-                var now = DateTime.Now;
+                var now = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
+                //var now = DateTime.Now;
                 OpeningTime schedule = OpeningTimes.FirstOrDefault(ot => ot.DayOfWeek == now.DayOfWeek);
 
                 // bar is closed

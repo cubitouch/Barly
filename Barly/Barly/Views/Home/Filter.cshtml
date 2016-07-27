@@ -7,10 +7,18 @@
     <div class="page-content">
         <div class="content-home">
             <form id="search" action="/Home/Search" method="get" class="form-horizontal">
-
+                <div class="mdl-grid">
+                    <div class="mdl-cell--12-col">
+                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="open">
+                            <input type="checkbox" id="open" name="open" class="mdl-switch__input" @(Model.OnlyOpenBars ? "checked" : "")>
+                            <span class="mdl-switch__label">Uniquement les bars ouverts</span>
+                        </label>
+                    </div>
+                </div>
+                <hr />
                 <div class="search-content-home mdl-grid mdl-grid--no-spacing">
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-1" name="zipcodes" value="75001" 
+                        <input type="checkbox" id="list-switch-1" name="zipcodes" value="75001"
                                @(Model.ZipCodes.Contains("75001") ? "checked" : "") />
                         <label for="list-switch-1">
                             <img src="../Content/img/75001.svg" />
@@ -18,7 +26,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-2" name="zipcodes" value="75002"  
+                        <input type="checkbox" id="list-switch-2" name="zipcodes" value="75002"
                                @(Model.ZipCodes.Contains("75002") ? "checked" : "") />
                         <label for="list-switch-2">
                             <img src="../Content/img/75002.svg" />
@@ -26,7 +34,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-3" name="zipcodes" value="75003"  
+                        <input type="checkbox" id="list-switch-3" name="zipcodes" value="75003"
                                @(Model.ZipCodes.Contains("75003") ? "checked" : "") />
                         <label for="list-switch-3">
                             <img src="../Content/img/75003.svg" />
@@ -34,7 +42,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-4" name="zipcodes" value="75004"  
+                        <input type="checkbox" id="list-switch-4" name="zipcodes" value="75004"
                                @(Model.ZipCodes.Contains("75004") ? "checked" : "") />
                         <label for="list-switch-4">
                             <img src="../Content/img/75004.svg" />
@@ -42,7 +50,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-5" name="zipcodes" value="75005"  
+                        <input type="checkbox" id="list-switch-5" name="zipcodes" value="75005"
                                @(Model.ZipCodes.Contains("75005") ? "checked" : "") />
                         <label for="list-switch-5">
                             <img src="../Content/img/75005.svg" />
@@ -50,7 +58,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-6" name="zipcodes" value="75006"  
+                        <input type="checkbox" id="list-switch-6" name="zipcodes" value="75006"
                                @(Model.ZipCodes.Contains("75006") ? "checked" : "") />
                         <label for="list-switch-6">
                             <img src="../Content/img/75006.svg" />
@@ -58,7 +66,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-7" name="zipcodes" value="75007"  
+                        <input type="checkbox" id="list-switch-7" name="zipcodes" value="75007"
                                @(Model.ZipCodes.Contains("75007") ? "checked" : "") />
                         <label for="list-switch-7">
                             <img src="../Content/img/75007.svg" />
@@ -66,7 +74,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-8" name="zipcodes" value="75008"  
+                        <input type="checkbox" id="list-switch-8" name="zipcodes" value="75008"
                                @(Model.ZipCodes.Contains("75008") ? "checked" : "") />
                         <label for="list-switch-8">
                             <img src="../Content/img/75008.svg" />
@@ -74,7 +82,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-9" name="zipcodes" value="75009"  
+                        <input type="checkbox" id="list-switch-9" name="zipcodes" value="75009"
                                @(Model.ZipCodes.Contains("75009") ? "checked" : "") />
                         <label for="list-switch-9">
                             <img src="../Content/img/75009.svg" />
@@ -82,7 +90,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-10" name="zipcodes" value="75010"  
+                        <input type="checkbox" id="list-switch-10" name="zipcodes" value="75010"
                                @(Model.ZipCodes.Contains("75010") ? "checked" : "") />
                         <label for="list-switch-10">
                             <img src="../Content/img/75010.svg" />
@@ -90,7 +98,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-11" name="zipcodes" value="75011"  
+                        <input type="checkbox" id="list-switch-11" name="zipcodes" value="75011"
                                @(Model.ZipCodes.Contains("75011") ? "checked" : "") />
                         <label for="list-switch-11">
                             <img src="../Content/img/75011.svg" />
@@ -98,7 +106,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-12" name="zipcodes" value="75012"  
+                        <input type="checkbox" id="list-switch-12" name="zipcodes" value="75012"
                                @(Model.ZipCodes.Contains("75012") ? "checked" : "") />
                         <label for="list-switch-12">
                             <img src="../Content/img/75012.svg" />
@@ -106,7 +114,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-13" name="zipcodes" value="75013"  
+                        <input type="checkbox" id="list-switch-13" name="zipcodes" value="75013"
                                @(Model.ZipCodes.Contains("75013") ? "checked" : "") />
                         <label for="list-switch-13">
                             <img src="../Content/img/75013.svg" />
@@ -114,7 +122,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-14" name="zipcodes" value="75014"  
+                        <input type="checkbox" id="list-switch-14" name="zipcodes" value="75014"
                                @(Model.ZipCodes.Contains("75014") ? "checked" : "") />
                         <label for="list-switch-14">
                             <img src="../Content/img/75014.svg" />
@@ -122,7 +130,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-15" name="zipcodes" value="75015"  
+                        <input type="checkbox" id="list-switch-15" name="zipcodes" value="75015"
                                @(Model.ZipCodes.Contains("75015") ? "checked" : "") />
                         <label for="list-switch-15">
                             <img src="../Content/img/75015.svg" />
@@ -130,7 +138,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-16" name="zipcodes" value="75016"  
+                        <input type="checkbox" id="list-switch-16" name="zipcodes" value="75016"
                                @(Model.ZipCodes.Contains("75016") ? "checked" : "") />
                         <label for="list-switch-16">
                             <img src="../Content/img/75016.svg" />
@@ -138,7 +146,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-17" name="zipcodes" value="75017"  
+                        <input type="checkbox" id="list-switch-17" name="zipcodes" value="75017"
                                @(Model.ZipCodes.Contains("75017") ? "checked" : "") />
                         <label for="list-switch-17">
                             <img src="../Content/img/75017.svg" />
@@ -146,7 +154,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-18" name="zipcodes" value="75018"  
+                        <input type="checkbox" id="list-switch-18" name="zipcodes" value="75018"
                                @(Model.ZipCodes.Contains("75018") ? "checked" : "") />
                         <label for="list-switch-18">
                             <img src="../Content/img/75018.svg" />
@@ -154,7 +162,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-19" name="zipcodes" value="75019"  
+                        <input type="checkbox" id="list-switch-19" name="zipcodes" value="75019"
                                @(Model.ZipCodes.Contains("75019") ? "checked" : "") />
                         <label for="list-switch-19">
                             <img src="../Content/img/75019.svg" />
@@ -162,7 +170,7 @@
                         </label>
                     </div>
                     <div class="input-container mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-                        <input type="checkbox" id="list-switch-20" name="zipcodes" value="75020"  
+                        <input type="checkbox" id="list-switch-20" name="zipcodes" value="75020"
                                @(Model.ZipCodes.Contains("75020") ? "checked" : "") />
                         <label for="list-switch-20">
                             <img src="../Content/img/75020.svg" />
@@ -208,13 +216,13 @@
 </main>
 <footer class="mdl-mini-footer">
     <div class="mdl-mini-footer--middle-section">
-        <button id="checkAll" class="third mdl-button mdl-js-button mdl-button--raised">
+        <button id="checkAll" class="third mdl-button mdl-button--colored">
             <i class="material-icons">playlist_add_check</i>
         </button>
-        <button id="submit" class="third mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+        <button id="submit" class="third mdl-button mdl-button--accent">
             <i class="material-icons">search</i>
         </button>
-        <a id="geolocalisation" class="third mdl-button mdl-js-button mdl-button--raised mdl-button--accent" href="#">
+        <a id="geolocalisation" class="third mdl-button mdl-button--accent" href="#">
             <i class="material-icons">my_location</i>
         </a>
     </div>

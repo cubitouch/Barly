@@ -7,6 +7,7 @@ namespace Barly.Models
 {
     public class FilterEditModel
     {
+        public bool OnlyOpenBars { get; set; }
         public IList<string> ZipCodes { get; set; }
 
         public FilterEditModel()
@@ -14,11 +15,14 @@ namespace Barly.Models
 
         }
 
-        public FilterEditModel(IList<string> zipcodes)
+        public FilterEditModel(IList<string> zipcodes, string onlyOpenBars)
         {
+            if (onlyOpenBars == "on")
+                OnlyOpenBars = true;
+
             ZipCodes = new List<string>();
 
-            if (zipcodes!= null)
+            if (zipcodes != null)
             {
                 foreach (string zipcode in zipcodes)
                 {
