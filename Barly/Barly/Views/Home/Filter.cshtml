@@ -7,7 +7,10 @@
     <div class="page-content">
         <div class="content-home">
             <form id="search" action="/Home/Search" method="get" class="form-horizontal">
-                <div class="mdl-grid">
+                <div class="mdl-grid mdl-grid--no-spacing">
+                    <div class="mdl-cell--12-col">
+                        <p>Cliquez ci-dessous pour selectionner uniquement les bar ouvert (Falcultatif)</p>
+                    </div>
                     <div class="input-container checkbox-custom open-bar mdl-cell--12-col">
                         <input type="checkbox" id="open" name="open" @(Model.OnlyOpenBars ? "checked" : "")>
                         <label for="open">
@@ -17,6 +20,10 @@
                 </div>
                 <hr />
                 <div class="search-content-home mdl-grid mdl-grid--no-spacing">
+                    <div class="mdl-cell--12-col">
+                        <p>Cliquez ci-dessous sur les arrondissement de votre choix</p>
+                    </div>
+
                     <div class="input-container checkbox-custom mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
                         <input type="checkbox" id="list-switch-1" name="zipcodes" value="75001"
                                @(Model.ZipCodes.Contains("75001") ? "checked" : "") />

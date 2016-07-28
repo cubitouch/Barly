@@ -248,7 +248,6 @@ a {
 /* Checkbox */
 
 .search-content-home {
-    text-align: center;
 }
 
     .search-content-home .input-container {
@@ -287,6 +286,7 @@ a {
     color: #ffffff;
     border-radius: 8px;
     cursor: pointer;
+    text-align: center;
 }
 
     .checkbox-custom label span {
@@ -342,7 +342,12 @@ a {
 .checkbox-custom.open-bar {
     width: 100%;
     text-transform: uppercase;
+    text-align: left;
 }
+
+    .checkbox-custom.open-bar label span {
+        text-align: left;
+    }
 
     .checkbox-custom.open-bar i {
         vertical-align: middle;
