@@ -83,5 +83,14 @@ namespace Barly.Controllers
 
             return Json(new LocationExternal(cacheItemFoursquare, cacheItemGoogle), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Tutorial()
+        {
+            return View();
+        }
+        public ActionResult About()
+        {
+            return View();
+        }
     }
 }

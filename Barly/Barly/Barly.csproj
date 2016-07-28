@@ -306,6 +306,8 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Home\Between.cshtml" />
     <Content Include="App_Data\ratp.json" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Tutorial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\locations\" />
