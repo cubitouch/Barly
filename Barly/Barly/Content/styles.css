@@ -147,6 +147,7 @@ a {
 
 .mdl-textfield__input {
     border-bottom: 1px solid rgba(255,255,255, 0.6);
+    color: #f1f1f1;
 }
 
 .mdl-textfield__label {
@@ -247,7 +248,6 @@ a {
 /* Checkbox */
 
 .search-content-home {
-    text-align: center;
 }
 
     .search-content-home .input-container {
@@ -272,70 +272,88 @@ a {
         display: inline-block;
     }
 
-    .search-content-home input[type="checkbox"][id^="list-switch"] {
-        display: none;
-    }
+.checkbox-custom input[type="checkbox"][id^="open"],
+.checkbox-custom input[type="checkbox"][id^="list-switch"] {
+    display: none;
+}
 
-    .search-content-home label {
+.checkbox-custom label {
+    display: block;
+    position: relative;
+    /*margin: 6px;*/
+    padding: 12px;
+    background-color: #23232b;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+}
+
+    .checkbox-custom label span {
         display: block;
-        position: relative;
-        /*margin: 6px;*/
-        padding: 12px;
-        background-color: #23232b;
         color: #ffffff;
-        border-radius: 8px;
-        cursor: pointer;
+        font-size: 14px;
     }
 
-        .search-content-home label span {
-            display: block;
-            color: #ffffff;
-            font-size: 14px;
-        }
-
-        .search-content-home label:before {
-            background-color: white;
-            color: white;
-            content: " ";
-            display: block;
-            border-radius: 50%;
-            border: 1px solid white;
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            width: 26px;
-            height: 26px;
-            text-align: center;
-            line-height: 28px;
-            transition-duration: 0.4s;
-            transform: scale(0);
-        }
-
-        .search-content-home label img {
-            height: 60px;
-            width: 60px;
-            transition-duration: 0.2s;
-            transform-origin: 50% 50%;
-            pointer-events: none;
-        }
-
-    .search-content-home input:checked + label {
-        background-color: #ff4081;
+    .checkbox-custom label:before {
+        background-color: white;
+        color: white;
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        border: 1px solid white;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        width: 26px;
+        height: 26px;
+        text-align: center;
+        line-height: 28px;
+        transition-duration: 0.4s;
+        transform: scale(0);
     }
 
-        .search-content-home input:checked + label:before {
-            content: "✓";
-            background-color: #ffffff;
-            transform: scale(1);
-            color: #ff4081;
-        }
+    .checkbox-custom label img {
+        height: 60px;
+        width: 60px;
+        transition-duration: 0.2s;
+        transform-origin: 50% 50%;
+        pointer-events: none;
+    }
 
-        .search-content-home input:checked + label img {
-            /*-webkit-transform: scale(0.9);
+.checkbox-custom input:checked + label {
+    background-color: #ff4081;
+}
+
+    .checkbox-custom input:checked + label:before {
+        content: "✓";
+        background-color: #ffffff;
+        transform: scale(1);
+        color: #ff4081;
+    }
+
+    .checkbox-custom input:checked + label img {
+        /*-webkit-transform: scale(0.9);
             -ms-transform: none;
             transform: scale(0.9);*/
-            z-index: -1;
-        }
+        z-index: -1;
+    }
+
+.checkbox-custom.open-bar {
+    width: 100%;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+    .checkbox-custom.open-bar label span {
+        text-align: left;
+    }
+
+    .checkbox-custom.open-bar i {
+        vertical-align: middle;
+        margin-right: 12px;
+    }
+
 /* Checkbox */
 
 
@@ -954,6 +972,21 @@ header.hide {
 
     .feature .mdl-button--accent.mdl-button--accent.mdl-button--raised, .feature .mdl-button--accent.mdl-button--accent.mdl-button--fab {
         font-size: 16px;
+    }
+
+    #newsletter .mdl-grid {
+        padding: 0 15px 22px 15px;
+        height: auto;
+    }
+
+    #newsletter .mdl-textfield {
+        width: 100%;
+    }
+
+    #newsletter .mdl-button {
+        display: table;
+        margin: 0 auto;
+        width: 200px;
     }
 }
 
