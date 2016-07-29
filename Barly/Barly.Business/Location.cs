@@ -97,7 +97,7 @@ namespace Barly.Business
             OpeningTimes.Add(ExtractOpeningTime(row, DayOfWeek.Monday, "Lundi", DateTime.Today.DayOfWeek == DayOfWeek.Monday));
             OpeningTimes.Add(ExtractOpeningTime(row, DayOfWeek.Tuesday, "Mardi", DateTime.Today.DayOfWeek == DayOfWeek.Tuesday));
             OpeningTimes.Add(ExtractOpeningTime(row, DayOfWeek.Wednesday, "Mercredi", DateTime.Today.DayOfWeek == DayOfWeek.Wednesday));
-            OpeningTimes.Add(ExtractOpeningTime(row, DayOfWeek.Monday, "Jeudi", DateTime.Today.DayOfWeek == DayOfWeek.Thursday));
+            OpeningTimes.Add(ExtractOpeningTime(row, DayOfWeek.Thursday, "Jeudi", DateTime.Today.DayOfWeek == DayOfWeek.Thursday));
             OpeningTimes.Add(ExtractOpeningTime(row, DayOfWeek.Friday, "Vendredi", DateTime.Today.DayOfWeek == DayOfWeek.Friday));
             OpeningTimes.Add(ExtractOpeningTime(row, DayOfWeek.Saturday, "Samedi", DateTime.Today.DayOfWeek == DayOfWeek.Saturday));
             OpeningTimes.Add(ExtractOpeningTime(row, DayOfWeek.Sunday, "Dimanche", DateTime.Today.DayOfWeek == DayOfWeek.Sunday));

@@ -270,6 +270,15 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\tutorial\06-menu-between.png" />
+    <Content Include="images\tutorial\01-menu-proximity.png" />
+    <Content Include="images\tutorial\02-proximity.png" />
+    <Content Include="images\tutorial\03-results-map.png" />
+    <Content Include="images\tutorial\04-results-list.png" />
+    <Content Include="images\tutorial\05-bar-scroll.png" />
+    <Content Include="images\tutorial\05-bar.png" />
+    <Content Include="images\tutorial\08-between-results.png" />
+    <Content Include="images\tutorial\07-between.png" />
     <Content Include="LoginCallback.ashx" />
     <None Include="Properties\PublishProfiles\barly.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

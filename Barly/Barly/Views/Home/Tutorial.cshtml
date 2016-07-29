@@ -3,8 +3,72 @@
 }
 <main class="mdl-layout__content home">
     <div class="page-content">
-        <div class="content-home">
-            <h1>Tutoriel</h1>
+        <div id="content-tutorial" class="mdl-typography--text-center">
+            <a id="close-tutorial" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--default" href="/Home/Index">
+                <i class="material-icons">clear</i>
+            </a>
+            <img src="" />
+            <hr />
+            <a id="prev-tutorial" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--default">
+                <i class="material-icons">navigate_before</i>
+            </a>
+            <a id="next-tutorial" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--default">
+                <i class="material-icons">navigate_next</i>
+            </a>
+            <a id="end-tutorial" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--accent" href="/Home/Filter">
+                <i class="material-icons">check</i>
+            </a>
         </div>
     </div>
+    <script>
+        var currentIndex = 0;
+        var swipes = [
+            "/images/tutorial/01-menu-proximity.png",
+            "/images/tutorial/02-proximity.png",
+            "/images/tutorial/03-results-map.png",
+            "/images/tutorial/04-results-list.png",
+            "/images/tutorial/05-bar-scroll.png",
+            "/images/tutorial/05-bar.png",
+            "/images/tutorial/06-menu-between.png",
+            "/images/tutorial/07-between.png",
+            "/images/tutorial/08-between-results.png"
+        ];
+        function initTutorial(i,init) {
+            currentIndex = i;
+            console.log(currentIndex);
+            var content = $('#content-tutorial');
+
+            var prev = content.find('#prev-tutorial');
+            var next = content.find('#next-tutorial');
+            var end = $('#end-tutorial');
+            var img = content.find('img');
+
+            if (init) {
+                prev.click(function () {
+                    initTutorial(currentIndex - 1);
+                });
+                next.click(function () {
+                    initTutorial(currentIndex + 1);
+                });
+            }
+
+            img.attr('src', swipes[currentIndex]);
+
+            if (currentIndex == 0) {
+                prev.hide();
+            } else {
+                prev.show();
+            }
+            if (currentIndex == swipes.length - 1) {
+                next.hide();
+                end.show();
+            } else {
+                next.show();
+                end.hide();
+            }
+        }
+        $(function () {
+            initTutorial(0,true);
+        });
+    </script>
 </main>

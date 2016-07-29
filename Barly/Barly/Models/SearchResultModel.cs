@@ -73,20 +73,25 @@ namespace Barly.Models
             var backOffice = new Business.BackOffice();
 
             int zone = 0;
-            while (Locations.Count < _findNumberBarFromLocations)
+            int notMatchableBarCount = 0;
+            while (Locations.Count < _findNumberBarFromLocations && notMatchableBarCount < backOffice.Locations.Count)
             {
+                notMatchableBarCount = 0;
                 zone += 200;
                 foreach (Location location in backOffice.Locations)
                 {
                     var locationCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);
-                    if (coordinate.GetDistanceTo(locationCoordinate) < zone 
-                        && location.IsValid 
-                        && !Locations.Contains(location) 
-                        && (!onlyOpen || location.IsOpenNow))
+                    if (location.IsValid && !Locations.Contains(location) && (!onlyOpen || onlyOpen && location.IsOpenNow))
                     {
-                        Locations.Add(location);
+                        if (coordinate.GetDistanceTo(locationCoordinate) < zone)
+                        {
+                            Locations.Add(location);
+                        }
                     }
-
+                    else
+                    {
+                        notMatchableBarCount++;
+                    }
                 }
             }
         }

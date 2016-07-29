@@ -130,6 +130,7 @@
             if (!bar.hasClass('open')) {
                 bar.addClass('open');
                 $('header').addClass('hide');
+                $('#bar-list').addClass('bar-open');
 
                 // get foursquare and google infos
                 addExternalData(bar);
@@ -164,7 +165,7 @@
 
             if (bar.find('.mdl-card-foursquare:visible').length == 0)
                 $.get('/Home/GetExternalInfos?id=' + bar.data('id') ,function(data){
-                    console.log(data);
+                    //console.log(data);
                     var dataFoursquare = data.Foursquare;
                     if (dataFoursquare && dataFoursquare.Id != ''){
                         var hasDataFoursquare=false;
@@ -197,7 +198,7 @@
                             bar.find('.mdl-card-foursquare').show();
                     }
                     var dataGoogle = data.Google;
-                    console.log(dataGoogle.Subways);
+                    //console.log(dataGoogle.Subways);
                     if (dataGoogle && dataGoogle.Subways.length>0 && bar.find('.mdl-card-google:visible').length==0){
                         for (var i = 0; i<dataGoogle.Subways.length; i++){
                             var html = '';
@@ -244,14 +245,20 @@
                 $('.bar .close-button').click(function(e){
                     $('.bar').removeClass('open');
                     $('header').removeClass('hide');
+                    $('#bar-list').removeClass('bar-open');
                     e.preventDefault();
                     return false;
                 });
             }
         });
 
+        var map ;
         var markers = [];
         function activeBarItem(id, active, activeBar){
+            var bar = $('.bar[data-id="'+id+'"]');
+            if (bar.hasClass('open'))
+                return false;
+
             var iconDefault = "http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-b.png";
             var iconActive = "http://mt.googleapis.com/vt/icon/name=icons/spotlight/spotlight-poi.png";
 
@@ -264,7 +271,6 @@
             }
 
             if (marker){
-                var bar = $('.bar[data-id="'+id+'"]');
                 if (active){
                     marker.setIcon(iconActive);
                     if (activeBar){
@@ -274,6 +280,9 @@
                                 bar.addClass('active');
                             });
                         }});
+                    } else {
+                        map.setZoom(17);
+                        map.panTo(marker.position);
                     }
                 }
                 else {
@@ -290,7 +299,7 @@
                 styles: mapStyle,
                 disableDefaultUI: true
             };
-            var map = new google.maps.Map(document.getElementById('bar-map'), mapOptions);
+            map = new google.maps.Map(document.getElementById('bar-map'), mapOptions);
             //create empty LatLngBounds object
             var bounds = new google.maps.LatLngBounds();
             var infowindow = new google.maps.InfoWindow();

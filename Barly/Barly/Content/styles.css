@@ -640,6 +640,10 @@ dialog img {
     padding: 0;
 }
 
+#bar-list.bar-open {
+    overflow: hidden;
+    height: 100%;
+}
 
 @media screen and (max-width: 839px) {
     .search-content.map #bar-list .bar {
@@ -962,3 +966,41 @@ header.hide {
 
 /* GOOD MEDIA QUERIES */
 
+#content-tutorial {
+    height: 100%;
+}
+
+#close-tutorial {
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+#prev-tutorial {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+}
+
+#next-tutorial,
+#end-tutorial {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.content-tutorial .mdl-card .mdl-card__title {
+    height: 100%;
+}
+
+.content-tutorial .mdl-card .mdl-card__supporting-text {
+    /*padding-bottom: -10px;*/
+}
+
+
+.mdl-button--default {
+    background: white;
+}
+.mdl-button--default:hover {
+    background-color: rgba(255,255,255,0.8);
+}
