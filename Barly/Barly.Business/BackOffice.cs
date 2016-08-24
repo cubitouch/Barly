@@ -24,31 +24,48 @@ namespace Barly.Business
         private object cacheLock = new object();
         private void LoadLocations()
         {
-            List locationTable = List.GetListById(_rowshareTableId);
-            string cacheFilename = HostingEnvironment.MapPath(string.Format("~/App_Data/locations/{0}.json", locationTable.LastUpdateDateUtc.Ticks.ToString()));
+            List locationTable = new List();
             bool hasNewCache = false;
-            if (System.IO.File.Exists(cacheFilename))
+
+            try
             {
-                lock (cacheLock)
+                locationTable = List.GetListById(_rowshareTableId);
+                string cacheFilename = HostingEnvironment.MapPath(string.Format("~/App_Data/locations/{0}.json", locationTable.LastUpdateDateUtc.Ticks.ToString()));
+                
+                if (System.IO.File.Exists(cacheFilename))
                 {
-                    locationTable.LoadRows(System.IO.File.ReadAllText(cacheFilename));
+                    lock (cacheLock)
+                    {
+                        locationTable.LoadRows(System.IO.File.ReadAllText(cacheFilename));
+                    }
+                }
+                else
+                {
+                    locationTable.LoadRows();
+                    hasNewCache = true;
+                }
+                if (hasNewCache)
+                {
+                    locationTable.CacheRowsToFS(cacheFilename);
+                    locationTable.ClearCache(cacheFilename, locationTable.LastUpdateDateUtc);
                 }
             }
-            else
+            catch (System.Exception e)
             {
-                locationTable.LoadRows();
-                hasNewCache = true;
+                string cacheDirectory = HostingEnvironment.MapPath(string.Format("~/App_Data/locations"));
+                foreach (string cacheFile in System.IO.Directory.GetFiles(cacheDirectory))
+                {
+                    lock (cacheLock)
+                    {
+                        locationTable.LoadRows(System.IO.File.ReadAllText(cacheFile));
+                    }
+                }
             }
 
             _locations = new List<Location>();
             foreach (Row row in locationTable.Rows)
             {
                 _locations.Add(new Location(row));
-            }
-            if (hasNewCache)
-            {
-                locationTable.CacheRowsToFS(cacheFilename);
-                locationTable.ClearCache(cacheFilename, locationTable.LastUpdateDateUtc);
             }
         }
     }

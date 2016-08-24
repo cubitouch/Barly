@@ -1,23 +1,29 @@
 ﻿@{
-    ViewBag.Title = "Barly";
+    ViewBag.Title = "Petit Spot";
 }
 <main class="mdl-layout__content home">
     <div class="page-content">
         <div class="content-home">
             <form id="search" action="/Home/SearchFromBetween" method="get" class="form-horizontal">
-                <div id="betweenContainer" class="mdl-grid">
+                <div class="mdl-grid">
                     <div class="mdl-cell--12-col">
-                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="open">
-                            <input type="checkbox" id="open" name="open" class="mdl-switch__input">
-                            <span class="mdl-switch__label">Uniquement les bars ouverts</span>
+                        <p>Souhaitez-vous uniquement trouver des petits spots ouverts ?</p>
+                    </div>
+                    <div class="input-container checkbox-custom open-bar mdl-cell--12-col">
+                        <input type="checkbox" id="open" name="open">
+                        <label for="open">
+                            <span><i class="material-icons">access_time</i> Uniquement les bars ouverts</span>
                         </label>
                     </div>
+                </div>
+                <hr />
+                <div id="betweenContainer" class="mdl-grid">
                     <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
-                        <input class="mdl-textfield__input" type="text" id="addressA">
+                        <input class="mdl-textfield__input" type="text" id="addressA" placeholder="Indiquez votre adresse">
                         <label class="mdl-textfield__label" for="addressA" id="addressALabel"></label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
-                        <input class="mdl-textfield__input" type="text" id="addressB">
+                        <input class="mdl-textfield__input" type="text" id="addressB" placeholder="Indiquez son adresse">
                         <label class="mdl-textfield__label" for="addressB" id="addressBLabel"></label>
                     </div>
                     <div class="mdl-cell mdl-cell--12-col">
@@ -26,7 +32,7 @@
                         <input type="hidden" value="0" name="latB" id="latB" />
                         <input type="hidden" value="0" name="lngB" id="lngB" />
                         <button id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
-                            <i class="material-icons">compare_arrows</i>&nbsp;Trouver
+                            <i class="material-icons">compare_arrows</i>&nbsp;Lancer la recherche
                         </button>
                     </div>
                 </div>

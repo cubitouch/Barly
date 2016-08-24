@@ -1,7 +1,7 @@
 ﻿@using Barly.Business;
 @model Barly.Models.SearchResultModel
 @{
-    ViewBag.Title = "Barly - Recherche";
+    ViewBag.Title = "Petit Spot - Recherche";
 }
 <main class="mdl-layout__content home">
     <div class="search-content map">
@@ -111,9 +111,9 @@
                         @*<a class="opener mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="$('.bar[data-id=@location.Id]').addClass('open');">
                                 <i class="material-icons">search</i>
                             </a>*@
-                        <a class="closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" href="http://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)&title=@Uri.EscapeDataString("Barly - " + @location.Name)" target="_blank">
+                        @*<a class="closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" href="http://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)&title=@Uri.EscapeDataString("Petit Spot - " + @location.Name)" target="_blank">
                             <i class="material-icons">share</i>
-                        </a>
+                        </a>*@
                         <a class="close-button closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                             <i class="material-icons">close</i>
                         </a>

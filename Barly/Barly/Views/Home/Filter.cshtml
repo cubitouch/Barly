@@ -1,15 +1,15 @@
 ﻿@model Barly.Models.FilterEditModel
 @using System.Security.Claims;
 @{
-    ViewBag.Title = "Barly";
+    ViewBag.Title = "Petit Spot";
 }
 <main class="mdl-layout__content home">
     <div class="page-content">
         <div class="content-home">
             <form id="search" action="/Home/Search" method="get" class="form-horizontal">
-                <div class="mdl-grid mdl-grid--no-spacing">
+                <div class="mdl-grid">
                     <div class="mdl-cell--12-col">
-                        <p>Cliquez ci-dessous pour selectionner uniquement les bar ouvert (Falcultatif)</p>
+                        <p>Souhaitez-vous uniquement trouver des petits spots ouverts ?</p>
                     </div>
                     <div class="input-container checkbox-custom open-bar mdl-cell--12-col">
                         <input type="checkbox" id="open" name="open" @(Model.OnlyOpenBars ? "checked" : "")>
@@ -19,11 +19,12 @@
                     </div>
                 </div>
                 <hr />
-                <div class="search-content-home mdl-grid mdl-grid--no-spacing">
+                <div class="search-content-home mdl-grid">
                     <div class="mdl-cell--12-col">
-                        <p>Cliquez ci-dessous sur les arrondissement de votre choix</p>
+                        <p>Sélectionnez les arrondissement de votre choix</p>
                     </div>
-
+                </div>
+                <div class="search-content-home mdl-grid mdl-grid--no-spacing">
                     <div class="input-container checkbox-custom mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
                         <input type="checkbox" id="list-switch-1" name="zipcodes" value="75001"
                                @(Model.ZipCodes.Contains("75001") ? "checked" : "") />
@@ -192,11 +193,11 @@
                         $("#search").submit();
                     });
                     $('#checkAll').click(function () {
-                        if ($('form input[type="checkbox"]').length == $('form input[type="checkbox"]:checked').length) {
-                            $('form input[type="checkbox"]').prop('checked', false);
+                        if ($('form .search-content-home input[type="checkbox"]').length == $('form .search-content-home input[type="checkbox"]:checked').length) {
+                            $('form .search-content-home input[type="checkbox"]').prop('checked', false);
                         }
                         else {
-                            $('form input[type="checkbox"]').prop('checked', true);
+                            $('form .search-content-home input[type="checkbox"]').prop('checked', true);
                         }
                         return false;
                     });
