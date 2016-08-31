@@ -55,34 +55,6 @@ namespace Barly.Controllers
             return View("Search", model);
         }
 
-        public JsonResult GetExternalInfos(int id)
-        {
-            var backOffice = new Business.BackOffice();
-            Location location = backOffice.Locations.FirstOrDefault(l => l.Id == id);
-
-            FoursquareVenue cacheItemFoursquare = null;
-            if (!string.IsNullOrWhiteSpace(location.FoursquareID))
-            {
-                string cacheKeyFoursquare = "foursquare-venue-" + location.FoursquareID;
-                cacheItemFoursquare = (FoursquareVenue)WebCache.Get(cacheKeyFoursquare);
-                if (cacheItemFoursquare == null)
-                {
-                    cacheItemFoursquare = new FoursquareVenue(location.FoursquareID);
-                    WebCache.Set(cacheKeyFoursquare, cacheItemFoursquare, 1440); // one day cache
-                }
-            }
-
-            GoogleNearby cacheItemGoogle = null;
-            string cacheKeyGoogle = "google-nearby-" + location.Id;
-            cacheItemGoogle = (GoogleNearby)WebCache.Get(cacheKeyGoogle);
-            if (cacheItemGoogle == null)
-            {
-                cacheItemGoogle = new GoogleNearby(location.Latitude,location.Longitude);
-                WebCache.Set(cacheKeyGoogle, cacheItemGoogle, 1440); // one day cache
-            }
-
-            return Json(new LocationExternal(cacheItemFoursquare, cacheItemGoogle), JsonRequestBehavior.AllowGet);
-        }
 
         public ActionResult Tutorial()
         {

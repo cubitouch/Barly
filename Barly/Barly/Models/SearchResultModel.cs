@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Device.Location;
+using System.Linq;
 using Barly.Business;
 
 namespace Barly.Models
 {
     public class SearchResultModel
     {
+        public FilterMode Mode { get; set; }
         public IList<Location> Locations { get; set; }
         public IDictionary<double, double> Positions { get; set; }
+        public IDictionary<double, double> Steps { get; set; }
 
         private const int _findNumberBarFromLocations = 5;
 
@@ -16,11 +19,14 @@ namespace Barly.Models
         {
             Locations = new List<Location>();
             Positions = new Dictionary<double, double>();
+            Steps = new Dictionary<double, double>();
         }
 
         public SearchResultModel(FilterEditModel filters) : this()
         {
-            switch (filters.Mode)
+            Mode = filters.Mode;
+
+            switch (Mode)
             {
                 case FilterMode.Geolocation:
                     {
@@ -61,7 +67,24 @@ namespace Barly.Models
 
         private void SearchForMidway(FilterEditModel filters)
         {
-            GeoCoordinate searchCoordinate = MidPoint(filters.PositionA, filters.PositionB);
+            GeoCoordinate searchCoordinate;
+
+            // get itinerary from Google Directions
+            GoogleItinerary itineraryComputer = new GoogleItinerary();
+            GoogleItineraryBase response = itineraryComputer.GetItinerary(filters.PositionA, filters.PositionB);
+
+            // push polylines to view for rendering
+            Steps = new Dictionary<double, double>();
+            foreach (var step in response.routes[0].legs[0].steps)
+            {
+                Steps.Add(step.end_location["lat"], step.end_location["lng"]);
+            }
+
+            // compute mid point ?
+            // TODO
+
+            // if google response is not relevant, use As The Crow Flies method
+            searchCoordinate = MidPoint(filters.PositionA, filters.PositionB);
             Positions.Add(filters.PositionA.Latitude, filters.PositionA.Longitude);
             Positions.Add(filters.PositionB.Latitude, filters.PositionB.Longitude);
 

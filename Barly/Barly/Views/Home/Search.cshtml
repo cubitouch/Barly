@@ -3,367 +3,141 @@
 @{
     ViewBag.Title = "Petit Spot - Recherche";
 }
-<main class="mdl-layout__content home">
-    <div class="search-content map">
-        <div id="bar-list" class="mdl-grid">
-            @foreach (Location location in Model.Locations)
+<script>
+
+    var positions =[
+        @foreach (KeyValuePair<double,double> location in Model.Positions)
             {
-                <div data-id="@location.Id" class="bar mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-                    <div class="mdl-card__title" style="background: url('@location.Picture') center / cover;">
-                        <h2 class="mdl-card__title-text">@location.Name</h2>
-                    </div>
-                    <div class="scrollable">
-                        <div class="closer mdl-card-list mdl-card-state">
-                            <ul class="mdl-list">
-                                <li class="mdl-list__item">
-                                    <span class="mdl-list__item-primary-content">
-                                        <i class="material-icons mdl-list__item-icon">@(location.IsOpenNow ? "schedule" : "watch_later")</i>
-                                        @(location.IsOpenNow ? "Ouvert" : "Fermé") en ce moment
-                                    </span>
-                                </li>
-                            </ul>
-                            @*<br />*@
-                            @*@Html.Raw(location.Description)*@
-                        </div>
-                        <div class="closer mdl-card-list">
-                            <ul class="mdl-list">
-                                @foreach (OpeningTime openingTime in location.OpeningTimes)
-                                {
-                                    <li class="mdl-list__item mdl-list__item--two-line @(openingTime.IsToday?"active":"")">
-                                        <span class="mdl-list__item-primary-content">
-                                            <i class="material-icons mdl-list__item-icon">@(openingTime.IsOpen ? "local_bar" : "")</i>
-                                            <span>@openingTime.DayOfWeekMessage</span>
-                                            <span class="mdl-list__item-sub-title">@openingTime.HoursFormat</span>
-                                        </span>
-                                    </li>
-                                }
-                            </ul>
-                        </div>
-                        <div class="closer mdl-card-list mdl-card-adress">
-                            <a href="http://maps.google.com/maps?daddr=@location.Latitude,@location.Longitude" target="_blank">
-                                <ul class="mdl-list">
-                                    <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            <i class="material-icons mdl-list__item-icon">directions_run</i>
-                                            @Html.Raw(location.Address)
-                                        </span>
-                                        <span class="mdl-list__item-secondary-action">
-                                            <i class="material-icons">navigate_next</i>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </a>
-                        </div>
-                        <div class="mdl-card-foursquare" style="display: none;">
-                            <div class="closer mdl-card-list">
-                                <ul class="mdl-list">
-                                    <li class="mdl-list__item foursquare-price">
-                                        <span class="mdl-list__item-primary-content">
-                                            <i class="material-icons mdl-list__item-icon">euro_symbol</i>
-                                            <span class="foursquare-price-value"></span>
-                                        </span>
-                                    </li>
-                                    <li class="mdl-list__item foursquare-phone">
-                                        <a href="tel:" target="_blank" class="foursquare-phone-control">
-                                            <span class="mdl-list__item-primary-content">
-                                                <i class="material-icons mdl-list__item-icon">phone</i>
-                                                <span class="foursquare-phone-value"></span>
-                                            </span>
-                                            <span class="mdl-list__item-secondary-action">
-                                                <i class="material-icons">navigate_next</i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdl-list__item foursquare-website">
-                                        <a href="#" target="_blank" class="foursquare-website-control">
-                                            <span class="mdl-list__item-primary-content">
-                                                <i class="material-icons mdl-list__item-icon">language</i>
-                                                <span class="foursquare-website-value"></span>
-                                            </span>
-                                            <span class="mdl-list__item-secondary-action">
-                                                <i class="material-icons">navigate_next</i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mdl-list__item">
-                                        <a href="@location.Foursquare" target="_blank">
-                                            <span class="mdl-list__item-primary-content">
-                                                <i class="material-icons mdl-list__item-icon">store</i>
-                                                Voir sur Foursquare
-                                            </span>
-                                            <span class="mdl-list__item-secondary-action">
-                                                <i class="material-icons">navigate_next</i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            @*<br />*@
-                            @*@Html.Raw(location.Description)*@
-                        </div>
-                        <div class="mdl-card-google" style="display: none;">
-                            <div class="closer mdl-card-list">
-                                <ul class="mdl-list"></ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mdl-card__menu">
-                        @*<a class="opener mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="$('.bar[data-id=@location.Id]').addClass('open');">
-                                <i class="material-icons">search</i>
-                            </a>*@
-                        @*<a class="closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" href="http://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)&title=@Uri.EscapeDataString("Petit Spot - " + @location.Name)" target="_blank">
-                            <i class="material-icons">share</i>
-                        </a>*@
-                        <a class="close-button closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-                            <i class="material-icons">close</i>
-                        </a>
-                    </div>
-                </div>
-            }
-        </div>
-        <div id="bar-map"></div>
-    </div>
-    <script>
-
-        function openBar(bar){
-            $('.bar').removeClass('open');
-            if (!bar.hasClass('open')) {
-                bar.addClass('open');
-                $('header').addClass('hide');
-                $('#bar-list').addClass('bar-open');
-
-                // get foursquare and google infos
-                addExternalData(bar);
-            }
+        <text>{
+            Latitude: @location.Key.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            Longitude: @location.Value.ToString(System.Globalization.CultureInfo.InvariantCulture),
+        },</text>
         }
-        var locations = [
-            @foreach (Location location in Model.Locations)
+    ];
+
+    var steps = [
+    @foreach (var step in Model.Steps)
         {
         <text>{
-                Id: @location.Id,
-                Name: "@location.Name",
-                @*Schedule: "@Html.Raw(location.Schedule)",*@
-                Picture: "@location.Picture",
-                Address: "@location.Address",
-                Latitude: @location.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                Longitude: @location.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture),
-            },</text>
+        Latitude: @step.Key.ToString(System.Globalization.CultureInfo.InvariantCulture),
+        Longitude: @step.Value.ToString(System.Globalization.CultureInfo.InvariantCulture),
+    },</text>
         }
-        ];
-        var positions =[
-            @foreach (KeyValuePair<double,double> location in Model.Positions)
-            {
-        <text>{
-                Latitude: @location.Key.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                Longitude: @location.Value.ToString(System.Globalization.CultureInfo.InvariantCulture),
-            },</text>
-            }
-        ];
-        //console.log(locations);
-        function addExternalData(b){
-            var bar = $(b);
+    ];
 
-            if (bar.find('.mdl-card-foursquare:visible').length == 0)
-                $.get('/Home/GetExternalInfos?id=' + bar.data('id') ,function(data){
-                    //console.log(data);
-                    var dataFoursquare = data.Foursquare;
-                    if (dataFoursquare && dataFoursquare.Id != ''){
-                        var hasDataFoursquare=false;
-                        if (dataFoursquare.Phone != null && dataFoursquare.Phone != ''){
-                            hasDataFoursquare=true;
-                            bar.find('.foursquare-phone').css('display','flex');
-                            bar.find('.foursquare-phone-value').text(dataFoursquare.Phone);
-                            bar.find('.foursquare-phone-control').attr('href','tel:'+dataFoursquare.Phone);
-                        }
-                        if (dataFoursquare.Website != null && dataFoursquare.Website != ''){
-                            hasDataFoursquare=true;
-                            bar.find('.foursquare-website').css('display','flex');
-                            bar.find('.foursquare-website-value').text(dataFoursquare.Website);
-                            bar.find('.foursquare-website-control').attr('href',dataFoursquare.Website);
-                        }
-                        if (dataFoursquare.Price != 0){
-                            hasDataFoursquare=true;
-                            bar.find('.foursquare-price').css('display','flex');
-                            var html = '';
-                            for (var i = 0; i< dataFoursquare.Price; i++){
-                                html += '<i class="material-icons mdl-list__item-icon">star</i>';
-                            }
-                            for (var i = 0; i< 4-dataFoursquare.Price; i++){
-                                html += '<i class="material-icons mdl-list__item-icon">star_border</i>';
-                            }
-                            bar.find('.foursquare-price-value').html(html);
-                        }
-
-                        if (hasDataFoursquare)
-                            bar.find('.mdl-card-foursquare').show();
-                    }
-                    var dataGoogle = data.Google;
-                    //console.log(dataGoogle.Subways);
-                    if (dataGoogle && dataGoogle.Subways.length>0 && bar.find('.mdl-card-google:visible').length==0){
-                        for (var i = 0; i<dataGoogle.Subways.length; i++){
-                            var html = '';
-                            html += '<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class="material-icons mdl-list__item-icon">subway</i>';
-                            html += dataGoogle.Subways[i].name
-                            html += '&nbsp;';
-                            for (var j = 0; j < dataGoogle.Subways[i].lines.length; j++){
-                                html += '<img src="/Content/img/ratp/M_'+dataGoogle.Subways[i].lines[j]+'.png">';
-                            }
-                            html += '</span></li>';
-
-                            bar.find('.mdl-card-google .mdl-list').append(html);
-                        }
-                        bar.find('.mdl-card-google').show();
-                    }
-                });
-        }
-        $(function(){
-            $('#filterTrigger').show();
-            if (locations.length>0){
-                $('#maplistTrigger').show();
-                $('#maplistTrigger').click(function(){
-                    $('.search-content').toggleClass('map');
-                    $('.search-content').toggleClass('list');
-
-                    if ($('.search-content').hasClass('list')){
-                        $('#maplistTrigger .material-icons').text('map');
-                    } else {
-                        $('#maplistTrigger .material-icons').text('border_all');
-                    }
-                });
-
-                $('.bar').click(function(){
-                    var bar = $(this);
-                    openBar(bar);
-                });
-                $('.bar').mouseover(function(){
-                    activeBarItem($(this).data('id'),true,false);
-                });
-                $('.bar').mouseout(function(){
-                    activeBarItem($(this).data('id'),false,false);
-                });
-
-                $('.bar .close-button').click(function(e){
-                    $('.bar').removeClass('open');
-                    $('header').removeClass('hide');
-                    $('#bar-list').removeClass('bar-open');
-                    e.preventDefault();
-                    return false;
-                });
-            }
+    function r(f) { /in/.test(document.readyState) ? setTimeout('r(' + f + ')', 9) : f() }
+    function initApplication(){
+        r(function(){
+            mode = "@Model.Mode";
+            initApp();
         });
-
-        var map ;
-        var markers = [];
-        function activeBarItem(id, active, activeBar){
-            var bar = $('.bar[data-id="'+id+'"]');
-            if (bar.hasClass('open'))
-                return false;
-
-            var iconDefault = "http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-b.png";
-            var iconActive = "http://mt.googleapis.com/vt/icon/name=icons/spotlight/spotlight-poi.png";
-
-            var marker = null;
-
-            for(var i  = 0; i<markers.length; i++){
-                if (markers[i].barId == id) {
-                    marker = markers[i];
-                }
-            }
-
-            if (marker){
-                if (active){
-                    marker.setIcon(iconActive);
-                    if (activeBar){
-                        $('#bar-list').scrollTo(bar,400,{offset:-40, onAfter: function() {
-                            requestAnimationFrame(function() {
-                                $('.bar').removeClass('active');
-                                bar.addClass('active');
-                            });
-                        }});
-                    } else {
-                        map.setZoom(17);
-                        map.panTo(marker.position);
-                    }
-                }
-                else {
-                    marker.setIcon(iconDefault);
-                    bar.removeClass('active');
-                }
-            }
-        }
-        function initializeMap() {
-            // https://snazzymaps.com/style/132/light-gray
-            var mapStyle = [{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#d3d3d3"}]},{"featureType":"transit","stylers":[{"color":"#808080"},{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#b3b3b3"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"weight":1.8}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"color":"#d7d7d7"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ebebeb"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#a7a7a7"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#efefef"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#696969"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#737373"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#d6d6d6"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"color":"#dadada"}]}];
-            var mapOptions = {
-                zoom: 3,
-                styles: mapStyle,
-                disableDefaultUI: true
-            };
-            map = new google.maps.Map(document.getElementById('bar-map'), mapOptions);
-            //create empty LatLngBounds object
-            var bounds = new google.maps.LatLngBounds();
-            var infowindow = new google.maps.InfoWindow();
-
-            for (i = 0; i < locations.length; i++) {
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(locations[i].Latitude, locations[i].Longitude),
-                    map: map,
-                    icon:'http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-b.png'
-                });
-                marker.barId = locations[i].Id;
-                markers.push(marker);
-
-                //extend the bounds to include each marker's position
-                bounds.extend(marker.position);
-
-                google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                    return function () {
-                        infowindow.setContent(locations[i].Name);
-                        infowindow.open(map, marker);
-                        var bar = $('.bar[data-id="'+locations[i].Id+'"]');
-                        openBar(bar);
-                    }
-                })(marker, i));
-
-                google.maps.event.addListener(marker, 'mouseover', (function (marker, i) {
-                    return function () {
-                        activeBarItem(marker.barId,true,true);
-                    }
-                })(marker, i));
-                google.maps.event.addListener(marker, 'mouseout', (function (marker, i) {
-                    return function () {
-                        activeBarItem(marker.barId,false,true);
-                    }
-                })(marker, i));
-            }
-            for (i = 0; i < positions.length; i++) {
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(positions[i].Latitude, positions[i].Longitude),
-                    map: map,
-                    icon:'http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-blue.png'
-                });
-                //markers.push(marker);
-                bounds.extend(marker.position);
-            }
-
-            /// need api key
-            var markerCluster = new MarkerClusterer(map, markers);
-
-            //now fit the map to the newly inclusive bounds
-            map.fitBounds(bounds);
-
-        }
-    </script>
-
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD61F5jFB_8ql02dWz6ql73Ve076nTEuQE"></script>
-    <script>
-        if (locations.length>0){
-            google.maps.event.addDomListener(window, 'load', initializeMap);
-        } else {
-            r(function(){
-                toastAlert("Aucun bar n'est disponible pour cette recherche");
-            });
-        }
-        function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}
-    </script>
+    };
+</script>
+<script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD61F5jFB_8ql02dWz6ql73Ve076nTEuQE&callback=initApplication"></script>
+<script type="text/javascript" async defer src="http://www.geocodezip.com/scripts/v3_epoly.js"></script>
+<main class="mdl-layout__content home">
+    <div class="search-content map">
+        <div id="bar-detail" class="mdl-card">
+            <div id="bar-detail-title" class="mdl-card__title" style="background: url('') center / cover;">
+                <h2 id="bar-detail-name" class="mdl-card__title-text">@*Name*@</h2>
+            </div>
+            <div class="scrollable">
+                <div class="mdl-card-list mdl-card-state">
+                    <ul class="mdl-list">
+                        <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <i id="bar-detail-openingstatus-icon" class="material-icons mdl-list__item-icon">
+                                    @*(IsOpenNow?"schedule":"watch_later")*@
+                                </i>
+                                <span id="bar-detail-openingstatus">
+                                    @*(@IsOpenNow?:"Ouvert":"Fermé") en ce moment*@
+                                </span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mdl-card-list">
+                    <ul id="bar-detail-hours" class="mdl-list"></ul>
+                </div>
+                <div class="mdl-card-list mdl-card-adress">
+                    <a id="bar-detail-address-link" href="http://maps.google.com/maps?daddr=0,1" target="_blank">
+                        <ul class="mdl-list">
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">directions_run</i>
+                                    <span id="bar-detail-address">@*Address*@</span>
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <i class="material-icons">navigate_next</i>
+                                </span>
+                            </li>
+                        </ul>
+                    </a>
+                </div>
+                <div id="bar-external-foursquare" class="mdl-card-foursquare" style="display: none;">
+                    <div class="mdl-card-list">
+                        <ul class="mdl-list">
+                            <li id="bar-external-foursquare-price" class="mdl-list__item foursquare-price">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">euro_symbol</i>
+                                    <span id="bar-external-foursquare-price-value" class="foursquare-price-value"></span>
+                                </span>
+                            </li>
+                            <li id="bar-external-foursquare-phone" class="mdl-list__item foursquare-phone">
+                                <a href="tel:" target="_blank" id="bar-external-foursquare-phone-control" class="foursquare-phone-control">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-icon">phone</i>
+                                        <span id="bar-external-foursquare-phone-value" class="foursquare-phone-value"></span>
+                                    </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                        <i class="material-icons">navigate_next</i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li id="bar-external-foursquare-website" class="mdl-list__item foursquare-website">
+                                <a href="#" target="_blank" id="bar-external-foursquare-website-control" class="foursquare-website-control">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-icon">language</i>
+                                        <span id="bar-external-foursquare-website-value" class="foursquare-website-value"></span>
+                                    </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                        <i class="material-icons">navigate_next</i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="mdl-list__item">
+                                <a id="bar-detail-foursquare-link" href="#" target="_blank">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-icon">store</i>
+                                        Voir sur Foursquare
+                                    </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                        <i class="material-icons">navigate_next</i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="bar-detail-google" class="mdl-card-google" style="display: none;">
+                    <div class="mdl-card-list">
+                        <ul class="mdl-list"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-card__menu">
+                @*<a class="closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" href="http://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString("http://" + Request.Url.Host + "/Home/SearchFromBarId?id=" + location.Id)&title=@Uri.EscapeDataString("Petit Spot - " + @location.Name)" target="_blank">
+                    <i class="material-icons">share</i>
+                    </a>*@
+                <a class="close-button closer mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                    <i class="material-icons">close</i>
+                </a>
+            </div>
+        </div>
+        <div id="bar-list" class="mdl-grid"></div>
+        <div id="bar-map"></div>
+        <div id="loader">
+            <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+        </div>
+    </div>
 </main>

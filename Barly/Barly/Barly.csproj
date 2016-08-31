@@ -178,6 +178,7 @@
     <Compile Include="App_Start\InternationalizationAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SessionAuthenticationConfig.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -355,7 +356,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4962</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4960/</IISUrl>
+          <IISUrl>http://localhost:4242/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

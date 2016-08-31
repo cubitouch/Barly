@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +48,7 @@
   <ItemGroup>
     <Compile Include="BackOffice.cs" />
     <Compile Include="FoursquareVenue.cs" />
+    <Compile Include="GoogleItinerary.cs" />
     <Compile Include="GoogleNearby.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="LocationExternal.cs" />

@@ -145,10 +145,10 @@ a {
     }
 
 
-#newsletter .mdl-textfield__input {
-    border-bottom: 1px solid rgba(255,255,255, 0.6);
-    color: #f1f1f1;
-}
+    #newsletter .mdl-textfield__input {
+        border-bottom: 1px solid rgba(255,255,255, 0.6);
+        color: #f1f1f1;
+    }
 
 .mdl-textfield__label {
     color: rgba(255,255,255, 0.6);
@@ -673,9 +673,42 @@ dialog img {
     }
 }
 
+#bar-list.list-hide {
+    display: none !important;
+}
+
+#bar-detail {
+    width: 100%;
+    position: absolute;
+    float: left;
+    z-index: 2000;
+    transform: translateX(-100%);
+    height: 100%;
+    transition: all linear 0.2s;
+}
+
+    #bar-detail.open {
+        transform: translateX(0);
+        top: 0;
+        z-index: 20000;
+    }
+
+        #bar-detail.open .scrollable {
+            overflow-y: scroll;
+            height: calc(100% - 176px);
+        }
+
 @media screen and (min-width: 840px) {
+
+    #bar-detail {
+        width: 38%;
+    }
+
+        #bar-detail.open {
+            position: relative;
+        }
+
     #bar-list {
-        width: 50%;
         display: flex !important;
         float: left;
         height: 100%;
@@ -1034,6 +1067,25 @@ header.hide {
 .mdl-button--default {
     background: white;
 }
-.mdl-button--default:hover {
-    background-color: rgba(255,255,255,0.8);
+
+    .mdl-button--default:hover {
+        background-color: rgba(255,255,255,0.8);
+    }
+
+#loader {
+    position: absolute;
+    z-index: 5000;
+    top: calc(50% - 60px);
+    left: calc(50% - 60px);
+    width: 120px;
+    background-color: white;
+    height: 120px;
+    border-radius: 120px;
+    padding-left:4px;
+    padding-right:4px;
 }
+
+    #loader .mdl-progress {
+        margin-top: 60px;
+        overflow: hidden;
+    }
