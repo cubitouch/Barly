@@ -17,6 +17,7 @@ namespace Barly.Models
         public IList<string> ZipCodes { get; set; }
         public GeoCoordinate PositionA { get; set; }
         public GeoCoordinate PositionB { get; set; }
+        public IDictionary<double, double> Positions { get; set; }
 
         public FilterMode Mode
         {
@@ -37,6 +38,7 @@ namespace Barly.Models
 
         public FilterEditModel(IList<string> zipcodes, string onlyOpenBars)
         {
+            Positions = new Dictionary<double, double>();
             if (onlyOpenBars == "on")
                 OnlyOpenBars = true;
 
@@ -52,18 +54,24 @@ namespace Barly.Models
         }
         public FilterEditModel(double lat, double lng, string onlyOpenBars)
         {
+            Positions = new Dictionary<double, double>();
             if (onlyOpenBars == "on")
                 OnlyOpenBars = true;
 
             PositionA = new GeoCoordinate(lat, lng);
+
+            Positions.Add(PositionA.Latitude, PositionA.Longitude);
         }
         public FilterEditModel(double latA, double lngA, double latB, double lngB, string onlyOpenBars)
         {
+            Positions = new Dictionary<double, double>();
             if (onlyOpenBars == "on")
                 OnlyOpenBars = true;
 
             PositionA = new GeoCoordinate(latA, lngA);
+            Positions.Add(PositionA.Latitude, PositionA.Longitude);
             PositionB = new GeoCoordinate(latB, lngB);
+            Positions.Add(PositionB.Latitude, PositionB.Longitude);
         }
     }
 }

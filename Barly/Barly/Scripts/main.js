@@ -1,6 +1,6 @@
 
 var mode = '';
-var displayInitineraryMode = 'default'; // directions | default
+var displayInitineraryMode = 'directions'; // directions | default
 var locations = [];
 var map;
 var markers = [];
@@ -267,7 +267,7 @@ function initBarMap(data) {
 function r(f) { /in/.test(document.readyState) ? setTimeout('r(' + f + ')', 9) : f() }
 
 var directionDisplay;
-var directionsService = new google.maps.DirectionsService();
+var directionsService;
 var polyline = null;
 var infowindow = new google.maps.InfoWindow();
 
@@ -308,6 +308,7 @@ function calcRoute() {
         destination: end,
         travelMode: travelMode
     };
+    directionsService = new google.maps.DirectionsService();
     directionsService.route(request, function (response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
             polyline.setPath([]);

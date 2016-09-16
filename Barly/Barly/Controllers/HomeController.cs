@@ -33,24 +33,25 @@ namespace Barly.Controllers
 
         public ActionResult Search(IList<string> zipcodes, string open)
         {
-            var model = new SearchResultModel(new FilterEditModel(zipcodes, open));
+            var model = new FilterEditModel(zipcodes, open);
             return View(model);
         }
 
         public ActionResult SearchFromBetween(double latA, double lngA, double latB, double lngB, string open)
         {
-            var model = new SearchResultModel(new FilterEditModel(latA, lngA, latB, lngB, open));
+            var model = new FilterEditModel(latA, lngA, latB, lngB, open);
             return View("Search", model);
         }
 
         public ActionResult SearchFromLocation(double latitude, double longitude, string open)
         {
-            var model = new SearchResultModel(new FilterEditModel(latitude, longitude, open));
+            var model = new FilterEditModel(latitude, longitude, open);
             return View("Search", model);
         }
 
         public ActionResult SearchFromBarId(int id)
         {
+            throw new System.Exception("TODO");
             var model = new SearchResultModel(id);
             return View("Search", model);
         }
